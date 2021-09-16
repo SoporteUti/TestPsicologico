@@ -164,16 +164,20 @@ body{
 			<!--INICIO DEL CONTENIDO-->
 			<?php
 				include("conexion.php");
+			if(isset($_POST['cod'])){
 				$codigo='%'.$_POST['cod'].'%';
 				$codi=$_POST['cod'];
-				if($_POST['bandera']=="buscar")
-				{
-			$consul="SELECT idaspirante,nit,apellido,nombre,edad,sexo, profesorado FROM tb_aspirantes where apellido like '$codigo' or nombre like '$codigo';";
+			  
+				if($_POST['bandera']=="buscar"){
+			   	$consul="SELECT idaspirante,nit,apellido,nombre,edad,sexo, profesorado FROM tb_aspirantes where apellido like '$codigo' or nombre like '$codigo';";
+				}else{
+				$consul='SELECT idaspirante,nit,apellido,nombre,edad,sexo,profesorado FROM tb_aspirantes;';
 				}
-				else
-				{
-			$consul='SELECT idaspirante,nit,apellido,nombre,edad,sexo,profesorado FROM tb_aspirantes;';
-				}
+			}else{
+				$codi='';
+				$consul='SELECT idaspirante,nit,apellido,nombre,edad,sexo,profesorado FROM tb_aspirantes;';	
+			}	
+			
 			?>
 			<form name="Flogin" method="post" action="">
 			<input type="hidden" name="bandera"> 
@@ -185,7 +189,7 @@ body{
 			  <table width="642" border="0" cellpadding="0" cellspacing="0">
 			  <tr>
 				  <td width="289" height="30"><label for="lbnombre" class="label2">Apellidos del Aspirante:</label></td>
-			  	  <td width="218" height="30"><input name="cod" type="text" class="texto1" id="cod" value="<?php echo $codi; ?>" /></td>
+			  	  <td width="218" height="30"><input name="cod" type="text" class="texto1" id="cod" value="<?php echo $codi; ?>" placeholder="Buscar"/></td>
 			      <td width="68"><input type="button" name="Submit" value="Buscar" class="button" onClick= "buscar(Flogin)" /></td>
 			      <td width="10">&nbsp;</td>
 			      <td width="57"><input type="button" name="Salir" value="Salir" class="button" onClick= "salir()" /></td>
@@ -206,9 +210,10 @@ body{
 <th>Ver</th>
 </tr>
 <?php
-$result0 = mysql_query($consul, $conexion);
+
+$result0 = mysqli_query($conexion,$consul);
 $i=0;
-while($row=mysql_fetch_array($result0))
+while($row=mysqli_fetch_array($result0))
 {
 ?>						
 <tr <?php if (($i%2)==0) {?>class="modo1" <?php }else {?> class="modo2" <?php } ?> onMouseOver="this.className='modo3'" onMouseOut="<?php if (($i%2)==0) {?>this.className='modo1' <?php } else { ?> this.className='modo2'<?php } ?> ">
@@ -224,7 +229,7 @@ echo'<td>'.$row['profesorado'].'</td>';
 echo'<td><a href="rev.php?var='.$row['idaspirante'].'"><img src="img/lupa.gif" border="0" width="20" height="20"></a></td>';
 echo'</tr>';
 }
-mysql_free_result($result0) or die (mysql_error());
+mysqli_free_result($result0);
 ?>
 </table>
 </div>
