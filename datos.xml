@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lista>
+	<facultad id="14">
+		<nombre><![CDATA[Ciencias y Humanidades]]></nombre>
+		<profesorados>
+			<profesorado c="0"><![CDATA[Seleccione un Profesorado]]></profesorado>
+			<profesorado c="1"><![CDATA[Educacion Basica para Primero y Segundo Ciclos]]></profesorado>
+			<profesorado c="2"><![CDATA[Idioma Ingles Tercer Ciclo]]></profesorado>
+			<profesorado c="3"><![CDATA[Lenguaje y Literatura Tercer Ciclo]]></profesorado>
+		</profesorados>
+	</facultad>
+	<facultad id="19">
+		<nombre><![CDATA[Ciencias Naturales y Matematica]]></nombre>
+		<profesorados>
+			<profesorado c="0"><![CDATA[Seleccione un Profesorado]]></profesorado>
+			<profesorado c="1"><![CDATA[Ciencias Naturales Tercer Ciclo y Bachillerato]]></profesorado>
+			<profesorado c="2"><![CDATA[Matematica para Tercer Ciclo y Educacion Media]]></profesorado>
+		</profesorados>
+	</facultad>
+	<facultad id="30">
+		<nombre><![CDATA[Multidisciplinaria Occidente]]></nombre>
+		<profesorados>
+			<profesorado c="0"><![CDATA[Seleccione un Profesorado]]></profesorado>
+			<profesorado c="1"><![CDATA[Ciencias Naturales Tercer Ciclo y Bachillerato]]></profesorado>
+			<profesorado c="2"><![CDATA[Educacion Basica para Primero y Segundo Ciclos]]></profesorado>
+			<profesorado c="3"><![CDATA[Idioma Ingles Tercer Ciclo]]></profesorado>
+			<profesorado c="4"><![CDATA[Lenguaje y Literatura Tercer Ciclo]]></profesorado>
+			<profesorado c="5"><![CDATA[Matematica para Tercer Ciclo y Educacion Media]]></profesorado>
+		</profesorados>
+	</facultad>
+	<facultad id="50">
+		<nombre><![CDATA[Multidisciplinaria Oriental]]></nombre>
+		<profesorados>
+			<profesorado c="0"><![CDATA[Seleccione un Profesorado]]></profesorado>
+			<profesorado c="1"><![CDATA[Ciencias Naturales Tercer Ciclo y Bachillerato]]></profesorado>
+			<profesorado c="2"><![CDATA[Educacion Basica para Primero y Segundo Ciclos]]></profesorado>
+			<profesorado c="3"><![CDATA[Idioma Ingles Tercer Ciclo]]></profesorado>
+			<profesorado c="4"><![CDATA[Lenguaje y Literatura Tercer Ciclo]]></profesorado>
+			<profesorado c="5"><![CDATA[Matematica para Tercer Ciclo y Educacion Media]]></profesorado>
+		</profesorados>
+	</facultad>
+	<facultad id="70">
+		<nombre><![CDATA[Multidisciplinaria Paracentral]]></nombre>
+		<profesorados>
+			<profesorado c="0"><![CDATA[Seleccione un Profesorado]]></profesorado>
+			<profesorado c="1"><![CDATA[Ciencias Naturales Tercer Ciclo y Bachillerato]]></profesorado>
+			<profesorado c="2"><![CDATA[Educacion Basica para Primero y Segundo Ciclos]]></profesorado>
+			<profesorado c="3"><![CDATA[Matematica para Tercer Ciclo y Educacion Media]]></profesorado>
+		</profesorados>
+	</facultad>
+</lista>
