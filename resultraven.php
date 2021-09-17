@@ -5,21 +5,21 @@ $percentilraven=0;
 $diagnosticoraven="";
 
 $sql="SELECT COUNT(*) AS num FROM tb_respraven t1 INNER JOIN tb_raven t2 ON t1.idraven=t2.idraven AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numraven = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 $sql="SELECT edad FROM tb_aspirantes WHERE idaspirante='$cod';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$edad = $row['edad'];
 }
-mysql_free_result($result) or die (mysql_error());
-mysql_close();
+mysqli_free_result($result);
+mysqli_close($conexion);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if($edad>=0 && $edad<=25)

@@ -7,7 +7,6 @@
 <script type="text/javascript" src="glossy/glossy.js"></script>
 
 <script language="JavaScript">
-<!--
 // Comienzo del c�digo
 // Especificamos las im�genes primarias
 
@@ -18,7 +17,6 @@ image1 = new Image();
 image1.src = "img/realizar2.jpg";
 
 // Fin del c�digo
--->
 </script>
 
 <style type="text/css">

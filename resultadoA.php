@@ -83,8 +83,8 @@ $anno= $anno + 1;
 $title5='A�O ACAD�MICO '.$anno;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	$consul="SELECT * FROM tb_resultadosa WHERE idaspirante='$cod' AND prueba_num='$num_prue';";
-	$result0 = mysql_query($consul, $conexion);
-	if($row=mysql_fetch_array($result0))
+	$result0 = mysqli_query($conexion,$consul);
+	if($row=mysqli_fetch_array($result0))
 	{
 	}
 	else
@@ -100,13 +100,13 @@ $title5='A�O ACAD�MICO '.$anno;
 		if($_SESSION["testraven"]==false && $_SESSION["testcep"]==false) 
 		{
 $sql = "INSERT INTO tb_resultadosa(idaspirante,praven,draven,pcep_c,pcep_e,pcep_p,pcep_s,pcep_x,dcep,dfinal,prueba_num) VALUES('$cod','$percentilraven','$diagnosticoraven','$percentilcep_c','$percentilcep_e','$percentilcep_p','$percentilcep_s', '$percentilcep_x','$diagnosticocep','$dfinal','$num_prue');";
-$result = @mysql_query($sql,$conexion) or die (mysql_error());
+$result = @mysqli_query($conexion,$sql);
 		}
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	$consul="SELECT nombre,apellido,if(sexo='M','Masculino','Femenino') as sex,profesorado FROM tb_aspirantes WHERE idaspirante='$cod';";
-	$result0 = mysql_query($consul, $conexion);
-	if($row=mysql_fetch_array($result0))
+	$result0 = mysqli_query($conexion,$consul);
+	if($row=mysqli_fetch_array($result0))
 	{
 		$name = utf8_decode($row['nombre']);
 		$ape = utf8_decode($row['apellido']);
@@ -116,15 +116,15 @@ $result = @mysql_query($sql,$conexion) or die (mysql_error());
 
 //PARA SACAR EL NOMBRE DE LA CARRERA A PROFESORADO
 	$sqlXX="SELECT nombre FROM tb_profesorados WHERE cod='$prof';";
-	$resultXX = mysql_query($sqlXX, $conexion);
-	if($rowXX=mysql_fetch_array($resultXX))
+	$resultXX = mysqli_query($conexion,$sqlXX);
+	if($rowXX=mysqli_fetch_array($resultXX))
 	{
 		$pp=$rowXX['nombre'];
 	}
 //PARA SACAR EL NOMBRE DEL ENCARGADO DE LA EVALUACION
 	$sqlXX="SELECT nombre FROM tb_admon;";
-	$resultXX = mysql_query($sqlXX, $conexion);
-	if($rowXX=mysql_fetch_array($resultXX))
+	$resultXX = mysqli_query($conexion,$sqlXX);
+	if($rowXX=mysqli_fetch_array($resultXX))
 	{
 		$lic=utf8_decode($rowXX['nombre']);
 	}
@@ -185,8 +185,8 @@ $pdf->MultiCell(0,5,$tex);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$consul="SELECT if(dfinal='A','APTO','NO APTO') as dd FROM tb_resultadosa WHERE idaspirante='$cod' AND prueba_num='$num_prue';";
-	$result0 = mysql_query($consul, $conexion);
-	if($row=mysql_fetch_array($result0))
+	$result0 = mysqli_query($conexion,$consul);
+	if($row=mysqli_fetch_array($result0))
 	{
 		$dfinalpdf=$row['dd'];
 	}
@@ -217,12 +217,12 @@ elseif($ddia==27){ $diax="a los veintisiete d�as del mes de"; }	elseif($ddia==
 elseif($ddia==29){ $diax="a los veintinueve d�as del mes de"; }	elseif($ddia==30){ $diax="a los treinta d�as del mes de"; }	
 elseif($ddia==31){ $diax="a los treinta y uno d�as del mes de";}
 $mm ="".date("m"); 
-if(eregi($mm, "01")){ $mesx=" enero"; }			elseif(eregi($mm, "02")){ $mesx=" febrero"; }
-elseif(eregi($mm, "03")){ $mesx=" marzo"; }		elseif(eregi($mm, "04")){ $mesx=" abril"; }
-elseif(eregi($mm, "05")){ $mesx=" mayo"; }		elseif(eregi($mm, "06")){ $mesx=" junio"; }
-elseif(eregi($mm, "07")){ $mesx=" julio"; }		elseif(eregi($mm, "08")){ $mesx=" agosto"; }
-elseif(eregi($mm, "09")){ $mesx=" septiembre"; }elseif(eregi($mm, "10")){ $mesx=" octubre"; }
-elseif(eregi($mm, "11")){ $mesx=" noviembre"; }	elseif(eregi($mm, "12")){ $mesx=" diciembre"; }
+if($mm=="01"){ $mesx=" enero"; }			elseif($mm=="02"){ $mesx=" febrero"; }
+elseif($mm=="03"){ $mesx=" marzo"; }		elseif($mm=="04"){ $mesx=" abril"; }
+elseif($mm=="05"){ $mesx=" mayo"; }		    elseif($mm=="06"){ $mesx=" junio"; }
+elseif($mm=="07"){ $mesx=" julio"; }		elseif($mm=="08"){ $mesx=" agosto"; }
+elseif($mm=="09"){ $mesx=" septiembre"; }   elseif($mm=="10"){ $mesx=" octubre"; }
+elseif($mm=="11"){ $mesx=" noviembre"; }	elseif($mm=="12"){ $mesx=" diciembre"; }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $tex="Y, para los usos que fuere �til se extiende la presente certificaci�n en la Ciudad Universitaria ".$diax." ".$mesx." de $anno.";
@@ -254,8 +254,8 @@ $pdf->Output();
 if($num_prue==2)
 {
 	$sql = "DELETE FROM tb_auxresultados WHERE num_prue=1 AND idaspirante='$cod';";
-	$result = @mysql_query($sql,$conexion) or die (mysql_error());
-	mysql_close();
+	$result = @mysqli_query($conexion,$sql);
+	mysqli_close($conexion);
 }
 
 session_destroy();

@@ -4,12 +4,12 @@ $percentilcep=0;
 $diagnosticocep="";
 //===============================================================================================================================================================\\
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='C' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 if($numcep>=0 && $numcep<=2)
 {
@@ -108,12 +108,12 @@ else
 }
 //===============================================================================================================================================================\\
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='E' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 if($numcep>=0 && $numcep<=4)
 {
@@ -222,12 +222,12 @@ else
 }
 //===============================================================================================================================================================\\
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='P' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 if($numcep>=0 && $numcep<=5)
 {
@@ -336,12 +336,12 @@ else
 }
 //===============================================================================================================================================================\\
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='S' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 if($numcep>=0 && $numcep<=1)
 {
@@ -430,12 +430,12 @@ else
 }
 //==========================================================================================================================================\\
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='?' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 if($numcep>=0 && $numcep<=1)
 {
