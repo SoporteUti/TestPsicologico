@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-	if($_SESSION[access]==false) 
+	if($_SESSION["access"]==false) 
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='index.php';";
@@ -9,13 +9,13 @@ session_start();
 	}
 	else
 	{	
-		$cod      = $_SESSION[cod];
-		$nombre   = $_SESSION[nombre];
-		$apellido = $_SESSION[apellido]; 
+		$cod      = $_SESSION["cod"];
+		$nombre   = $_SESSION["nombre"];
+		$apellido = $_SESSION["apellido"]; 
 //		$minutosX  = $_SESSION[m];
 //		$segundosX = $_SESSION[s];
-		$numpageX = $_SESSION[numpagecep];
-		$num_prue = $_SESSION[num_prue];
+		$numpageX = $_SESSION["numpagecep"];
+		$num_prue = $_SESSION["num_prue"];
 	}
 
 ?>
@@ -385,7 +385,7 @@ document.onkeydown=checkKeyCode;
 //				echo'<input type="hidden" name="s" value="'.$_SESSION[s].'">';
 				//echo'<INPUT TYPE="button" NAME="boton"><br>';
 	//			$nn=$_GET['numpage'];
-				$nn=$_SESSION[numpagecep];
+				$nn=$_SESSION["numpagecep"];
 				if($nn == null)
 				{
 					$nn=0;
@@ -428,34 +428,35 @@ document.onkeydown=checkKeyCode;
 				echo'<input type="hidden" name="sal">';
 				echo '<center>';
 				echo'<div id="Layer1" style="width:850px; height:400px; overflow: scroll;">';
+				$aux3=0;
 				for($i=1; $i<=$f; $i++)
 				{
 					$id = $i + ($nn * 50);
 					//AQUI EMPIEZA LAS PREGUNTAS DEL CEP//
 					$sql0 = "SELECT * FROM tb_cep WHERE idcep=$id;";
-					$result0 = mysql_query($sql0, $conexion);
-					if($row=mysql_fetch_array($result0))
+					$result0 = mysqli_query($conexion,$sql0);
+					if($row=mysqli_fetch_array($result0))
 					{
 						//EMPIEZA PARA VER CUAL ESTA SELECCIONADO DE LAS OPCIONES
 						//AQUI SE LE TIENE QUE AGREGAR EL CODIGO DEL ASPIRANTE A LA CONSULTA 
 						$sqlx = "SELECT respuesta FROM tb_respcep WHERE idcep='$id' AND idaspirante=$cod AND idnum_prue=$num_prue;";
-						$resultx = mysql_query($sqlx, $conexion);
-						if($rowx=mysql_fetch_array($resultx))
+						$resultx = mysqli_query($conexion,$sqlx);
+						if($rowx=mysqli_fetch_array($resultx))
 						{
 							echo'<input type="hidden" name="inser" value="1">';
-							if(eregi($rowx["respuesta"], "1"))
+							if(preg_match($rowx["respuesta"], "1"))
 							{
 								$OpcionCEP1="checked";
 								$OpcionCEP2="";
 								$OpcionCEP3="";
 							}
-							else if(eregi($rowx["respuesta"], "2"))
+							else if(preg_match($rowx["respuesta"], "2"))
 							{
 								$OpcionCEP1="";
 								$OpcionCEP2="checked";
 								$OpcionCEP3="";
 							}
-							else if(eregi($rowx["respuesta"], "3"))
+							else if(preg_match($rowx["respuesta"], "3"))
 							{
 								$OpcionCEP1="";
 								$OpcionCEP2="";
@@ -468,7 +469,7 @@ document.onkeydown=checkKeyCode;
 								$OpcionCEP3="";
 							}
 						}
-						mysql_free_result($resultx) or die (mysql_error());
+						mysqli_free_result($resultx);
 						//FIN DE LA BUSQUEDA
 						echo'<table border="0" width="700"><tr><td>';
 						echo'<fieldset>';
@@ -485,7 +486,7 @@ document.onkeydown=checkKeyCode;
 						echo'</fieldset>';
 						echo'</td></tr></table>';
 					}
-					mysql_free_result($result0) or die (mysql_error());
+					mysqli_free_result($result0);
 					//FIN DE PREGUNTAS CEP//
 
 				}//fin del filtro que solo deja pasar 10 numeros
@@ -523,14 +524,19 @@ document.onkeydown=checkKeyCode;
 </html>
 <?php
 	include('conexion.php');
+	if(isset($_POST['bandera'])){
 	$aux1=$_POST['bandera'];
 	$aux2=$_POST['atras'];
 //	$minutos=$_POST['m'];
 //	$segundos=$_POST['s'];
 	$numpage=$_POST['numpages'];
 	$salir=$_POST['sal'];
+
+	if(isset($_POST['inser'])){
 	$inser=$_POST['inser'];
-				
+	}else{
+		$inser=0;
+	}
 	if ($aux1=='guardar')
 	{
 		if($numpage==0)
@@ -562,22 +568,22 @@ $ppcep = array($_POST['CEP101'],$_POST['CEP102'],$_POST['CEP103'],$_POST['CEP104
 				if($inser=="1")
 				{
 					$sql = "UPDATE tb_respcep SET respuesta='$ppcep[$i]' WHERE idcep='$aux1' AND idaspirante='$cod' AND idnum_prue='$num_prue';";
-					$result = @mysql_query($sql,$conexion) or die (mysql_error());
+					$result = @mysqli_query($conexion,$sql);
 				}
 				else
 				{
 					$sql = "INSERT INTO tb_respcep (idcep,idaspirante,idnum_prue,respuesta) VALUES($aux1,'$cod','$num_prue','$ppcep[$i]');";
-					$result = @mysql_query($sql,$conexion) or die (mysql_error());
+					$result = @mysqli_query($conexion,$sql);
 				}
 			}
 	  	}
-		mysql_close();
+		mysqli_close($conexion);
 		if ($aux2=='atras')
 		{
 //			$_SESSION[m]=$minutos;
 //			$_SESSION[s]=$segundos;
 			$numpage = $numpage - 1;
-			$_SESSION[numpagecep]=$numpage;
+			$_SESSION["numpagecep"]=$numpage;
 			echo'<script type="text/JavaScript">';
 			echo'{';
 				echo'location.href="testcep.php";';
@@ -587,7 +593,7 @@ $ppcep = array($_POST['CEP101'],$_POST['CEP102'],$_POST['CEP103'],$_POST['CEP104
 		else
 		{
 			$numpage = $numpage + 1;
-			$_SESSION[numpagecep]=$numpage;
+			$_SESSION["numpagecep"]=$numpage;
 //			$_SESSION[m]=$minutos;
 //			$_SESSION[s]=$segundos;
 			if($salir=="salir")
@@ -604,7 +610,7 @@ $ppcep = array($_POST['CEP101'],$_POST['CEP102'],$_POST['CEP103'],$_POST['CEP104
 			}
 			else
 			{
-				$_SESSION[testcep]=false;
+				$_SESSION["testcep"]=false;
 				echo'<script type="text/JavaScript">';
 				echo'{';
 					echo'location.href="pruebaA.php?var=2";';
@@ -613,4 +619,5 @@ $ppcep = array($_POST['CEP101'],$_POST['CEP102'],$_POST['CEP103'],$_POST['CEP104
 			}
 		}
 	}
+}//fin isset para validar los error que no esta definida la variable
 ?>
