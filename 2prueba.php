@@ -273,49 +273,50 @@ input:focus
 </html>
 <?php
 include("conexion.php");
+if(isset($_POST['cod'])){
 $codigo=$_POST['cod'];
 $flag=false;
 	$sqlx="SELECT idaspirante FROM tb_aspirantes WHERE nit='$codigo';";
-	$result3 = mysql_query($sqlx, $conexion);
-	if($row=mysql_fetch_array($result3))
+	$result3 = mysqli_query($conexion,$sqlx);
+	if($row=mysqli_fetch_array($result3))
 	{
 		$idaspirante=$row['idaspirante'];
 	}
-	$result3 = @mysql_query($sqlx,$conexion) or die (mysql_error());
+	$result3 = @mysqli_query($conexion,$sqlx);
 	
 if($_POST['bandera']=="ingresar")
 {
 	$sqlx="SELECT * FROM tb_auxresultados WHERE num_prue=1 AND idaspirante='$idaspirante';";
-	$result3 = mysql_query($sqlx, $conexion);
-	if($row=mysql_fetch_array($result3))
+	$result3 = mysqli_query($conexion,$sqlx);
+	if($row=mysqli_fetch_array($result3))
 	{
 		$flag=true;
 	}
-	$result3 = @mysql_query($sqlx,$conexion) or die (mysql_error());
+	$result3 = @mysqli_query($conexion,$sqlx);
 	
 	if($flag==true)
 	{
 		$sql="SELECT * FROM tb_aspirantes WHERE nit='$codigo';";
-		$result0 = mysql_query($sql, $conexion);
-		if($row=mysql_fetch_array($result0))
+		$result0 = mysqli_query($conexion,$sql);
+		if($row=mysqli_fetch_array($result0))
 		{
-			$_SESSION[access] = true;
-			$_SESSION[cod] = $row['idaspirante'];
-			$_SESSION[nombre] = $row['nombre']; 
-			$_SESSION[apellido] = $row['apellido']; 
-			$_SESSION[nit] = $row['nit'];
-			$_SESSION[s] = 0;
-			$_SESSION[m] = 0;
-			$_SESSION[numpageotis] = 0;
-			$_SESSION[numpageepq] = 0;
-			$_SESSION[numpageraven] = 0;
-			$_SESSION[numpagecep] = 0;
-			$_SESSION[num_prue] = 2;
+			$_SESSION["access"] = true;
+			$_SESSION["cod"] = $row['idaspirante'];
+			$_SESSION["nombre"] = $row['nombre']; 
+			$_SESSION["apellido"] = $row['apellido']; 
+			$_SESSION["nit"] = $row['nit'];
+			$_SESSION["s"] = 0;
+			$_SESSION["m"] = 0;
+			$_SESSION["numpageotis"] = 0;
+			$_SESSION["numpageepq"] = 0;
+			$_SESSION["numpageraven"] = 0;
+			$_SESSION["numpagecep"] = 0;
+			$_SESSION["num_prue"] = 2;
 			//para que el aspirante solo pueda realizar una sola vez cada prueba
-			$_SESSION[testotis] = true;
-			$_SESSION[testepq] = true;
-			$_SESSION[testraven] = true;
-			$_SESSION[testcep] = true;
+			$_SESSION["testotis"] = true;
+			$_SESSION["testepq"] = true;
+			$_SESSION["testraven"] = true;
+			$_SESSION["testcep"] = true;
 		
 			echo'<script type="text/JavaScript">';
 			echo'{';
@@ -325,7 +326,7 @@ if($_POST['bandera']=="ingresar")
 		}
 		else
 		{
-			$_SESSION[acce] = false;
+			$_SESSION["acce"] = false;
 			echo'<script type="text/JavaScript">';
 			echo'{';
 				echo'alert("ERROR: NIT DE ASPIRANTE NO REGISTRADO...");';
@@ -341,5 +342,6 @@ if($_POST['bandera']=="ingresar")
 			echo'}';
 			echo'</script>';	
 	}
-}
+}//if bandera
+}//if isset
 ?>

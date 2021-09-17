@@ -111,7 +111,7 @@ function validar(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla==8) return true;//Tecla de retroceso (para poder borrar)
-    //patron =/[A-Z a-z áéíóú]/; // Solo acepta letras
+    //patron =/[A-Z a-z ï¿½ï¿½ï¿½ï¿½ï¿½]/; // Solo acepta letras
 	//patron =/[\t\D]/;
 	patron = /\d/;
     te = String.fromCharCode(tecla);
@@ -500,7 +500,7 @@ $flag=false;
 if($_POST['bandera']=="guardar")
 {
 
-/*esto genera el numero de aspirante, pero ya lo tienen, así que lo voy a pedir en el formulario 10/08/2013, por lo tanto hay que modificar el formulario
+/*esto genera el numero de aspirante, pero ya lo tienen, asï¿½ que lo voy a pedir en el formulario 10/08/2013, por lo tanto hay que modificar el formulario
 
 	$consul="SELECT COUNT(*) AS numfin FROM tb_aspirantes;";
 	$result0 = mysql_query($consul, $conexion);
@@ -528,7 +528,7 @@ if($_POST['bandera']=="guardar")
 	if($flag==false)
 	{
 		$sql = "INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,sexo,edad,profesorado) 		VALUES('$numfin','$nit','$nombre','$apellido','$sex','$edad','$prof');";
-		$result = @mysqli_query($conexion,$sql) or die (mysqli_error());
+		$result = @mysqli_query($conexion,$sql);
 		mysqli_close($conexion);
 
 		echo'<script type="text/JavaScript">';
@@ -542,7 +542,7 @@ if($_POST['bandera']=="guardar")
 	{
 		echo'<script type="text/JavaScript">';
 		echo'{';
-			echo'alert("NIT:'.$nit.'  O Nº ASPIRANTE: '.$numfin.' YA EXISTE POR FAVOR VERIFICAR...");';
+			echo'alert("NIT:'.$nit.'  O Nï¿½ ASPIRANTE: '.$numfin.' YA EXISTE POR FAVOR VERIFICAR...");';
 		echo'}';
 		echo'</script>';
 	}

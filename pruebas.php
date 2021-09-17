@@ -58,8 +58,8 @@ body
 			<table width="95%">
 			<tr>
 				<td width="25%"><b>DATOS DEL ASPIRANTE:</font></b></td>
-				<td width="5%"><b><font color="#0000CC">NIT:</font></b></td>
-				<td width="18%"><b><font color="#FF0000"><?php echo $_SESSION["nit"]; ?></font></b></td>
+				<td width="5%"><b><font color="#0000CC">NÚMERO:</font></b></td>
+				<td width="18%"><b><font color="#FF0000"><?php echo $_SESSION["cod"]; ?></font></b></td>
 				<td width="8%"><b><font color="#0000CC">NOMBRE:</font></b></td>
 	<td width="55%"><b><font color="#FF0000"><?php echo strtoupper($_SESSION["nombre"]).' '.strtoupper($_SESSION["apellido"]); ?></font></b></td>
 	<td><a href="index.php">[Salir]</a></td>
