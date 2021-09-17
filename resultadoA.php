@@ -3,7 +3,7 @@
 	
 	//echo "aaaaaaaaaaaaaaaaaaaaaa". $_SESSION[cod];
 	
-	if($_SESSION[access]==false) 
+	if($_SESSION["access"]==false) 
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='index.php';";
@@ -11,10 +11,10 @@
 	}
 	else
 	{	
-		$cod = $_SESSION[cod];
-		$num_prue = $_SESSION[num_prue];
+		$cod = $_SESSION["cod"];
+		$num_prue = $_SESSION["num_prue"];
 	}
-	if($_SESSION[testraven]==true || $_SESSION[testcep]==true)  
+	if($_SESSION["testraven"]==true || $_SESSION["testcep"]==true)  
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='error_pruebaA.php';";
@@ -74,13 +74,13 @@ class PDF extends FPDF
 }
 $pdf=new PDF();
 $title='UNIVERSIDAD DE EL SALVADOR';
-$title2='Vicerrectoria Académica';
+$title2='Vicerrectoria Acadï¿½mica';
 $title3='Unidad de Ingreso Universitario';
-$title4='RESULTADO DE EVALUACIÓN PSICOLÓGICA';
+$title4='RESULTADO DE EVALUACIï¿½N PSICOLï¿½GICA';
 $tiempo = time();
 $anno = date ( "Y" , $tiempo);
 $anno= $anno + 1; 
-$title5='AÑO ACADÉMICO '.$anno;
+$title5='Aï¿½O ACADï¿½MICO '.$anno;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	$consul="SELECT * FROM tb_resultadosa WHERE idaspirante='$cod' AND prueba_num='$num_prue';";
 	$result0 = mysql_query($consul, $conexion);
@@ -97,7 +97,7 @@ $title5='AÑO ACADÉMICO '.$anno;
 		{
 			$dfinal="A";
 		}
-		if($_SESSION[testraven]==false && $_SESSION[testcep]==false) 
+		if($_SESSION["testraven"]==false && $_SESSION["testcep"]==false) 
 		{
 $sql = "INSERT INTO tb_resultadosa(idaspirante,praven,draven,pcep_c,pcep_e,pcep_p,pcep_s,pcep_x,dcep,dfinal,prueba_num) VALUES('$cod','$percentilraven','$diagnosticoraven','$percentilcep_c','$percentilcep_e','$percentilcep_p','$percentilcep_s', '$percentilcep_x','$diagnosticocep','$dfinal','$num_prue');";
 $result = @mysql_query($sql,$conexion) or die (mysql_error());
@@ -153,7 +153,7 @@ $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 $pdf->Cell(0,20,'Aspirante No.: '.$cod,0,1);
 
-$tex0='El suscrito encargado del realizar la Prueba Psicológica a los aspirantes a estudiar las carreras de PROFESORADO  en la Facultad ';
+$tex0='El suscrito encargado del realizar la Prueba Psicolï¿½gica a los aspirantes a estudiar las carreras de PROFESORADO  en la Facultad ';
 $tex1=', Ingreso ';
 $tex2 = '. CERTIFICA QUE: ';
 $tex3 = $tex0.$fac.$tex1.$anno.$tex2;
@@ -165,7 +165,7 @@ $pdf->Cell(0,-5,''.strtoupper($ape).'  '.strtoupper($name),0,1);
 
 $pdf->SetFont('Times','',12);
 $pdf->SetY(110);
-$pdf->Cell(0,20,'Género: '.$ss,0,1);
+$pdf->Cell(0,20,'Gï¿½nero: '.$ss,0,1);
 
 $pdf->Cell(0,10,'Aspirante a ingresar al Profesorado en:',0,1);
 
@@ -175,12 +175,12 @@ $pdf->Ln();
 $pdf->SetX(0);
 $pdf->SetX(20);
 
-$pdf->Cell(0,15,'Código: '.$prof);
+$pdf->Cell(0,15,'Cï¿½digo: '.$prof);
 
 $pdf->SetX(0);
 $pdf->SetX(20);
 $pdf->Ln(20);
-$tex="Se sometió a la Prueba Psicológica de Personalidad e Inteligencia tal como los dispone el Ministerio de Educación.";
+$tex="Se sometiï¿½ a la Prueba Psicolï¿½gica de Personalidad e Inteligencia tal como los dispone el Ministerio de Educaciï¿½n.";
 $pdf->MultiCell(0,5,$tex);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -196,22 +196,26 @@ $pdf->Cell(0,20,'Obteniendo un resultado de: '.$dfinalpdf.'.',0,1);
 
 ///////////////////////////////////////FECHA EN LETRAS///////////////////////////////////////////////////////////////////////////////////////////////
 $ddia = date("d"); 
-if($ddia==01){ $diax="al primer día del mes de"; }				elseif($ddia==02){ $diax="a los dos días del mes de"; }
-elseif($ddia==03){ $diax="a los tres días del mes de"; } 		elseif($ddia==04){ $diax="a los cuatro días del mes de"; }
-elseif($ddia==05){ $diax="a los cinco días del mes de"; }		elseif($ddia==06){ $diax="a los seis días del mes de"; }
-elseif($ddia==07){ $diax="a los siete días del mes de"; }		elseif($ddia==08){ $diax="a los ocho días del mes de"; }
-elseif($ddia==09){ $diax="a los nueve días del mes de"; }		elseif($ddia==10){ $diax="a los diez días del mes de"; }
-elseif($ddia==11){ $diax="a los once días del mes de"; }		elseif($ddia==12){ $diax="a los doce días del mes de"; }
-elseif($ddia==13){ $diax="a los trece días del mes de"; }		elseif($ddia==14){ $diax="a los catorce días del mes de"; }
-elseif($ddia==15){ $diax="a los quince días del mes de"; }		elseif($ddia==16){ $diax="a los dieciseis días del mes de"; }
-elseif($ddia==17){ $diax="a los diecisiete días del mes de"; }	elseif($ddia==18){ $diax="a los dieciocho días del mes de"; }	
-elseif($ddia==19){ $diax="a los diecinueve días del mes de"; }	elseif($ddia==20){ $diax="a los veinte días del mes de"; }	
-elseif($ddia==21){ $diax="a los veintiuno días del mes de"; }	elseif($ddia==22){ $diax="a los veintidos  días del mes de"; }	
-elseif($ddia==23){ $diax="a los veintitres días del mes de"; }	elseif($ddia==24){ $diax="a los veinticuatro días del mes de"; }	
-elseif($ddia==25){ $diax="a los veinticinco días del mes de"; }	elseif($ddia==26){ $diax="a los veintiseis días del mes de"; }	
-elseif($ddia==27){ $diax="a los veintisiete días del mes de"; }	elseif($ddia==28){ $diax="a los veintiocho días del mes de"; }	
-elseif($ddia==29){ $diax="a los veintinueve días del mes de"; }	elseif($ddia==30){ $diax="a los treinta días del mes de"; }	
-elseif($ddia==31){ $diax="a los treinta y uno días del mes de";}
+
+if($ddia==01){ $diax="al primer dï¿½a del mes de"; }				elseif($ddia==02){ $diax="a los dos dï¿½as del mes de"; }
+elseif($ddia==03){ $diax="a los tres dï¿½as del mes de"; } 		elseif($ddia==04){ $diax="a los cuatro dï¿½as del mes de"; }
+elseif($ddia==05){ $diax="a los cinco dï¿½as del mes de"; }		elseif($ddia==06){ $diax="a los seis dï¿½as del mes de"; }
+elseif($ddia==07)
+{ $diax="a los siete dï¿½as del mes de"; }	
+	elseif($ddia==8)
+	{ $diax="a los ocho dï¿½as del mes de"; }
+elseif($ddia==9){ $diax="a los nueve dï¿½as del mes de"; }		elseif($ddia==10){ $diax="a los diez dï¿½as del mes de"; }
+elseif($ddia==11){ $diax="a los once dï¿½as del mes de"; }		elseif($ddia==12){ $diax="a los doce dï¿½as del mes de"; }
+elseif($ddia==13){ $diax="a los trece dï¿½as del mes de"; }		elseif($ddia==14){ $diax="a los catorce dï¿½as del mes de"; }
+elseif($ddia==15){ $diax="a los quince dï¿½as del mes de"; }		elseif($ddia==16){ $diax="a los dieciseis dï¿½as del mes de"; }
+elseif($ddia==17){ $diax="a los diecisiete dï¿½as del mes de"; }	elseif($ddia==18){ $diax="a los dieciocho dï¿½as del mes de"; }	
+elseif($ddia==19){ $diax="a los diecinueve dï¿½as del mes de"; }	elseif($ddia==20){ $diax="a los veinte dï¿½as del mes de"; }	
+elseif($ddia==21){ $diax="a los veintiuno dï¿½as del mes de"; }	elseif($ddia==22){ $diax="a los veintidos  dï¿½as del mes de"; }	
+elseif($ddia==23){ $diax="a los veintitres dï¿½as del mes de"; }	elseif($ddia==24){ $diax="a los veinticuatro dï¿½as del mes de"; }	
+elseif($ddia==25){ $diax="a los veinticinco dï¿½as del mes de"; }	elseif($ddia==26){ $diax="a los veintiseis dï¿½as del mes de"; }	
+elseif($ddia==27){ $diax="a los veintisiete dï¿½as del mes de"; }	elseif($ddia==28){ $diax="a los veintiocho dï¿½as del mes de"; }	
+elseif($ddia==29){ $diax="a los veintinueve dï¿½as del mes de"; }	elseif($ddia==30){ $diax="a los treinta dï¿½as del mes de"; }	
+elseif($ddia==31){ $diax="a los treinta y uno dï¿½as del mes de";}
 $mm ="".date("m"); 
 if(eregi($mm, "01")){ $mesx=" enero"; }			elseif(eregi($mm, "02")){ $mesx=" febrero"; }
 elseif(eregi($mm, "03")){ $mesx=" marzo"; }		elseif(eregi($mm, "04")){ $mesx=" abril"; }
@@ -221,7 +225,7 @@ elseif(eregi($mm, "09")){ $mesx=" septiembre"; }elseif(eregi($mm, "10")){ $mesx=
 elseif(eregi($mm, "11")){ $mesx=" noviembre"; }	elseif(eregi($mm, "12")){ $mesx=" diciembre"; }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$tex="Y, para los usos que fuere útil se extiende la presente certificación en la Ciudad Universitaria ".$diax." ".$mesx." de $anno.";
+$tex="Y, para los usos que fuere ï¿½til se extiende la presente certificaciï¿½n en la Ciudad Universitaria ".$diax." ".$mesx." de $anno.";
 $pdf->MultiCell(0,5,$tex);
 
 $pdf->Ln(10);
@@ -235,7 +239,7 @@ $ww=$pdf->GetStringWidth($tex)+6;
    	$pdf->SetX((210-$ww)/2);
     $pdf->Cell($ww,10,$tex);
 $pdf->Ln(5);
-$tex="ENCARGADO DE REALIZAR LA EVALUACIÓN PSICOLÓGICA A LOS ASPIRANTES A";
+$tex="ENCARGADO DE REALIZAR LA EVALUACIï¿½N PSICOLï¿½GICA A LOS ASPIRANTES A";
 $ww=$pdf->GetStringWidth($tex)+6;
    	$pdf->SetX((210-$ww)/2);
     $pdf->Cell($ww,10,$tex);

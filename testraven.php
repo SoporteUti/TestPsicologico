@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	
-	if($_SESSION[access]==false) 
+	if($_SESSION["access"]==false) 
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='index.php';";
@@ -11,13 +11,13 @@
 	{
 	   
 
-		$cod      = $_SESSION[cod];
-		$nombre   = $_SESSION[nombre];
-		$apellido = $_SESSION[apellido]; 
+		$cod      = $_SESSION["cod"];
+		$nombre   = $_SESSION["nombre"];
+		$apellido = $_SESSION["apellido"]; 
 //		$minutosX  = $_SESSION[m];
 //		$segundosX = $_SESSION[s];
-		$numpageX = $_SESSION[numpageraven];
-		$num_prue = $_SESSION[num_prue];
+		$numpageX = $_SESSION["numpageraven"];
+		$num_prue = $_SESSION["num_prue"];
 	}
 
 ?>
@@ -386,7 +386,7 @@ document.onkeydown=checkKeyCode;
 //			echo'<input type="hidden" name="s" value="'.$_SESSION[s].'">';
 			//echo'<INPUT TYPE="button" NAME="boton"><br>';
 			//$nn=$_GET['numpage'];
-			$nn=$_SESSION[numpageraven];
+			$nn=$_SESSION["numpageraven"];
 			if($nn == null)
 			{
 				$nn=0;
@@ -427,14 +427,14 @@ document.onkeydown=checkKeyCode;
 				$id = $i + ($nn * 15);
 				///AQUI EMPIEZAN LAS PREGUNTAS DEL RAVEN/
 				$sql0 = "SELECT * FROM tb_raven WHERE idraven=$id;";
-				$result0 = mysql_query($sql0, $conexion);
-				if($row=mysql_fetch_array($result0))
+				$result0 = mysqli_query($conexion,$sql0);
+				if($row=mysqli_fetch_array($result0))
 				{
 					//EMPIEZA PARA VER CUAL ESTA SELECCIONADO DE LAS OPCIONES
 					//AQUI SE LE TIENE QUE AGREGAR EL CODIGO DEL ASPIRANTE A LA CONSULTA 
 					$sqlx = "SELECT respuesta FROM tb_respraven WHERE idraven='$id' AND idaspirante=$cod  AND idnum_prue=$num_prue;";
-					$resultx = mysql_query($sqlx, $conexion);
-					if($rowx=mysql_fetch_array($resultx))
+					$resultx = mysqli_query($conexion,$sqlx);
+					if($rowx=mysqli_fetch_array($resultx))
 					{
 						echo'<input type="hidden" name="inser" value="1">';
 						if(eregi($rowx["respuesta"], "1"))
@@ -537,7 +537,7 @@ document.onkeydown=checkKeyCode;
 							$OpcionRAVEN8="";
 						}
 					}
-					mysql_free_result($resultx) or die (mysql_error());
+					mysqli_free_result($resultx);
 						//FIN DE LA BUSQUEDA
 						echo'<table border="0" width="900"><tr><td>';
 						echo'<fieldset>';
@@ -635,7 +635,7 @@ document.onkeydown=checkKeyCode;
 						echo'</fieldset>';
 						echo'</td></tr></table>';
 					}
-					mysql_free_result($result0);
+					mysqli_free_result($result0);
 					//FINAL DE LAS PREGUNTAS RAVEN
 
 				}//fin del filtro que solo deja pasar 10 numeros
@@ -673,6 +673,7 @@ document.onkeydown=checkKeyCode;
 </html>
 <?php
 	include('conexion.php');
+	if(isset($_POST['bandera'])){
 	$aux1=$_POST['bandera'];
 	$aux2=$_POST['atras'];
 //	$minutos=$_POST['m'];
@@ -714,22 +715,22 @@ document.onkeydown=checkKeyCode;
 				if($inser=="1")
 				{
 					$sql = "UPDATE tb_respraven SET respuesta='$ppraven[$i]' WHERE idraven='$aux1' AND idaspirante='$cod' AND idnum_prue='$num_prue';";
-					$result = @mysql_query($sql,$conexion) or die (mysql_error());
+					$result = @mysqli_query($conexion,$sql);
 				}
 				else
 				{
 					$sql1 = "INSERT INTO tb_respraven (idraven,idaspirante,idnum_prue,respuesta) VALUES($aux1,'$cod','$num_prue','$ppraven[$i]');";
-					$result1 = @mysql_query($sql1,$conexion) or die (mysql_error());
+					$result1 = @mysqli_query($conexion,$sql1);
 				}
 			}
 	  	}
-		mysql_close();
+		mysqli_close($conexion);
 		if ($aux2=='atras')
 		{
 //			$_SESSION[m]=$minutos;
 //			$_SESSION[s]=$segundos;
 			$numpage = $numpage - 1;
-			$_SESSION[numpageraven]=$numpage;
+			$_SESSION["numpageraven"]=$numpage;
 			echo'<script type="text/JavaScript">';
 			echo'{';
 				echo'location.href="testraven.php";';
@@ -739,7 +740,7 @@ document.onkeydown=checkKeyCode;
 		else
 		{
 			$numpage = $numpage + 1;
-			$_SESSION[numpageraven]=$numpage;
+			$_SESSION["numpageraven"]=$numpage;
 //			$_SESSION[m]=$minutos;
 //			$_SESSION[s]=$segundos;
 			if($salir=="salir")
@@ -756,7 +757,7 @@ document.onkeydown=checkKeyCode;
 			}
 			else
 			{
-				$_SESSION[testraven]=false;
+				$_SESSION["testraven"]=false;
 				echo'<script type="text/JavaScript">';
 				echo'{';
 					echo'location.href="pruebaA.php?var=1";';
@@ -765,4 +766,5 @@ document.onkeydown=checkKeyCode;
 			}
 		}
 	}
+}//fin isset
 ?>

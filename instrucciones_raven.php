@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if($_SESSION[access]==false) 
+	if($_SESSION["access"]==false) 
 	{
 		echo "<script language='javascript'>";
 	     echo"location.href='index.php';";
@@ -9,7 +9,7 @@
 	else
 	{
 	}
-	if($_SESSION[testraven]==false) 
+	if($_SESSION["testraven"]==false) 
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='error_pruebaA.php';";

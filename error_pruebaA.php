@@ -8,8 +8,8 @@
 
 <script language="JavaScript">
 <!--
-// Comienzo del código
-// Especificamos las imágenes primarias
+// Comienzo del cï¿½digo
+// Especificamos las imï¿½genes primarias
 
 image0 = new Image();
 image0.src = "img/ing_admon2.jpg";
@@ -17,7 +17,7 @@ image0.src = "img/ing_admon2.jpg";
 image1 = new Image();
 image1.src = "img/realizar2.jpg";
 
-// Fin del código
+// Fin del cï¿½digo
 -->
 </script>
 
@@ -64,22 +64,22 @@ body
 			<p>&nbsp;</p>
 			  <!--INICIO DEL CONTENIDO-->
 			  <?php
-			  		if($_SESSION[testraven]==false && $_SESSION[testcep]==true) 
+			  		if($_SESSION["testraven"]==false && $_SESSION["testcep"]==true) 
 					{
 						//echo'ERROR: TU YA REALIZASTE LA PRUEBA RAVEN DEBES DE REALIZAR LA PRUEBA CEP AHORA...';
 						echo'<img src="img/errorB1.gif">';
 					}
-			  		else if($_SESSION[testraven]==true && $_SESSION[testcep]==false) 
+			  		else if($_SESSION["testraven"]==true && $_SESSION["testcep"]==false) 
 					{
 						//echo'ERROR: TU YA REALIZASTE LA PRUEBA CEP DEBES DE REALIZAR LA PRUEBA RAVEN AHORA...';
 						echo'<img src="img/errorB2.gif">';
 					}
-			  		else if($_SESSION[testraven]==false && $_SESSION[testcep]==false) 
+			  		else if($_SESSION["testraven"]==false && $_SESSION["testcep"]==false) 
 					{
 						//echo'ERROR: TU YA REALIZASTE LAS PRUEBAS RAVEN Y CEP AHORA YA PUEDES VER TUS RESULTADOS...';
 						echo'<img src="img/errorB3.gif">';
 					}
-			  		else if($_SESSION[testraven]==true && $_SESSION[testcep]==true) 
+			  		else if($_SESSION["testraven"]==true && $_SESSION["testcep"]==true) 
 					{
 						//echo'ERROR: DEBES DE REALIZAR LAS PRUEBAS RAVEN Y CEP PARA PODER VER TUS RESULTADOS...';
 						echo'<img src="img/errorB4.gif">';

@@ -207,7 +207,7 @@ input:focus
 		}
 		else if (document.Flogin.txtnit2.value=="")
 		{
-// 			alert('DEBE ESCRIBIR LA CONTRASEÑA..');
+// 			alert('DEBE ESCRIBIR LA CONTRASEï¿½A..');
 			Sexy.alert('DEBE ESCRIBIR SU NUMERO DE NIT....');
 			document.Flogin.txtnit2.focus();
 		}
@@ -311,7 +311,7 @@ if(d.valant != d.value){
 			  <table width="351" border="0" cellpadding="0" cellspacing="0">
 			  <tr>
 				  <td width="146"  height="30"><label for="lbnombre" class="label2">
-					Nº Aspirante:</label></td>
+					Nï¿½ Aspirante:</label></td>
 			  	  <td width="201"  height="30">
 					<input name="txtaspirante" type="text" class="texto1" id="txtaspirante" onKeyPress="return validar(event)" size="6"  maxlength="6"/> </td>
 			  </tr>
@@ -373,7 +373,7 @@ if($_POST['bandera']=="ingresar")
 			if($flag==false)
 			{
 				$sql2 = "update tb_aspirantes set fecha='$fecha' where idaspirante=$cod_asp;";
-				$result2 = @mysqli_query($conexion,$sql2) or die (mysqli_error());
+				$result2 = @mysqli_query($conexion,$sql2);
 				
 				$_SESSION["access"] = true;
 				$_SESSION["cod"] = $row['idaspirante'];
@@ -400,7 +400,7 @@ if($_POST['bandera']=="ingresar")
 			{
 				echo'<script type="text/JavaScript">';
 				echo'{';
-					echo'alert("Ya realizaste la evaluciòn....");';
+					echo'alert("Ya realizaste la evaluciï¿½n....");';
 				echo'}';
 				echo'</script>';
 			}
