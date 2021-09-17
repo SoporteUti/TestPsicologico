@@ -283,7 +283,8 @@ include("conexion.php");
 													$PA = "";
 													$PB = "";
 													$PT = "";
-											
+													$prof = "";
+													if(isset($_POST['prueba'])){
 													if ($_POST['prueba'] == "A") {
 														$PA = "checked";
 														$PB = "";
@@ -303,7 +304,7 @@ include("conexion.php");
 													}
 													$prof = $_POST['profesoradoList'];
 												
-													
+												}//fin de if
 													//PARA SACAR EL NOMBRE DE LA CARRERA A PROFESORADO
 													$sqlXX = "SELECT nombre FROM tb_profesorados WHERE cod='$prof';";
 													$resultXX = mysqli_query($conexion,$sqlXX);
@@ -363,7 +364,7 @@ include("conexion.php");
 		</form>
 		<!--INICIO PARA MOSTRAR LA TABLA-->
 		<?php
-		
+		if(isset($_POST['bandera'])){
 		if ($_POST['bandera'] == "consulta") {
 			echo '<b>PROFESORADO: ' . $pp . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>FACULTAD: ' . $fac;
 			echo '<div id="Layer1" style="width:820px; height:215px; overflow: scroll;">';
@@ -455,7 +456,8 @@ include("conexion.php");
 			}
 			echo '</table>';
 			echo '</div>';
-		}
+		}//if de bandera=$consulta
+	
 
 		if ($i != 0) {
 			if ($_POST['prueba'] == "A") {
@@ -466,7 +468,7 @@ include("conexion.php");
 				echo '<a href="reporteT.php?var=' . $prof . '" target="_blank"><img src="img/pdf.png" border="0" width="50" height="50"></a>';
 			}
 		}
-
+     }//isset
 			?>
 			<br><a href="administrador.php"><img src="img/volver.jpg" border="0" class="glossy"></a>
 			<!--FIN DEL CONTENIDO-->
