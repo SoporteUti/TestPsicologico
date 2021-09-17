@@ -5,8 +5,8 @@ $prof = $_GET['var'];
 
 //PARA SACAR EL NOMBRE DE LA CARRERA A PROFESORADO
 	$sqlXX="SELECT nombre FROM tb_profesorados WHERE cod='$prof';";
-	$resultXX = mysql_query($sqlXX, $conexion);
-	if($rowXX=mysql_fetch_array($resultXX))
+	$resultXX = mysqli_query($conexion,$sqlXX);
+	if($rowXX=mysqli_fetch_array($resultXX))
 	{
 		$pp=$rowXX['nombre'];
 	}
@@ -36,6 +36,7 @@ class MYPDF extends FPDF
    var $right = 10;
    var $top = 94.5;
    var $bottom = 10;
+   var $angle=0;
    	function Header()
 	{
 		global $title;
@@ -62,7 +63,7 @@ class MYPDF extends FPDF
 		$this->Cell(50,5,"UNIDAD DE EVALUACION PSICOLOGICA");
 		$this->SetFont('Arial','B',11);
 		$this->Ln(10);$this->SetX(55);
-	    $this->Cell(25,5,"RESULTADO DE LA EVALUACIÓN PSICOLÓGICA A ASPIRANTES A INGRESAR A LOS PROFESORADOS");
+	    $this->Cell(25,5,"RESULTADO DE LA EVALUACIï¿½N PSICOLï¿½GICA A ASPIRANTES A INGRESAR A LOS PROFESORADOS");
 		$this->SetFont('Arial','',10);
 		$this->Ln(10);$this->SetX(25);
 	    $this->Cell(20,5,$title);
@@ -246,7 +247,7 @@ class MYPDF extends FPDF
       }
       return $nl;
    }
-	//Pie de página
+	//Pie de pï¿½gina
 	function Footer()
 	{
 	//	$this->SetY(-15);$this->SetX(-15);
@@ -258,7 +259,7 @@ class MYPDF extends FPDF
 		$this->Cell(0,20,'M=Masculino / F=Femenino / A=Aprobado / R=Reprobado',0,1);
     	$this->SetY(-15);
 	    $this->SetFont('Arial','I',8);
-    	$this->Cell(0,10,'Página '.$this->PageNo().'/{nb}',0,0,'C');
+    	$this->Cell(0,10,'Pï¿½gina '.$this->PageNo().'/{nb}',0,0,'C');
 	}
 }
 
@@ -266,13 +267,13 @@ $pdf=new MYPDF('L','mm','letter');
 $tiempo = time();
 $anno = date ( "Y" , $tiempo);
 $anno= $anno + 1; 
-$title3='AÑO: '.$anno;
+$title3='Aï¿½O: '.$anno;
 
 $title='PROFESORADO: '.$pp;
 $title2='FACULTAD: '.$fac;
 
-$title4='RESULTADO DE EVALUACIÓN PSICOLÓGICA';
-$title5='AÑO ACADÉMICO '.$anno;
+$title4='RESULTADO DE EVALUACIï¿½N PSICOLï¿½GICA';
+$title5='Aï¿½O ACADï¿½MICO '.$anno;
 
 $pdf->AliasNbPages();
 $pdf->SetMargins($pdf->left, $pdf->top, $pdf->right); 
@@ -282,8 +283,8 @@ $pdf->AddPage();
 $i=0;
 $columns = array();      
 $consul='SELECT * FROM todos where profesorado="'.$prof.'" order by apellido,num_prue asc';
-$result0 = mysql_query($consul, $conexion);
-while($row=mysql_fetch_array($result0))
+$result0 = mysqli_query($conexion,$consul);
+while($row=mysqli_fetch_array($result0))
 {
 $i++;
 //row['idaspirante']
