@@ -2,8 +2,11 @@
 $numcep=0;
 $percentilcep=0;
 $diagnosticocep="";
+//$_SESSION["num_prue"];
+//var_dump($cod);
 //===============================================================================================================================================================\\
-$sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='C' AND t1.idnum_prue='$num_prue';";
+include("conexion.php");
+$sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='C';";
 $result = mysqli_query($conexion,$sql);
 if($row=mysqli_fetch_array($result))
 {

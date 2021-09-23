@@ -3,12 +3,14 @@ $numraven=0;
 $edad=0;
 $percentilraven=0;
 $diagnosticoraven="";
-
+//var_dump($cod);
+//var_dump($num_prue);
 $sql="SELECT COUNT(*) AS num FROM tb_respraven t1 INNER JOIN tb_raven t2 ON t1.idraven=t2.idraven AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND t1.idnum_prue='$num_prue';";
 $result = mysqli_query($conexion,$sql);
 if($row=mysqli_fetch_array($result))
 {
 	$numraven = $row['num'];
+	//var_dump($numraven);
 }
 mysqli_free_result($result);
 

@@ -435,9 +435,10 @@ document.onkeydown=checkKeyCode;
 					$sqlx = "SELECT respuesta FROM tb_respraven WHERE idraven='$id' AND idaspirante=$cod  AND idnum_prue=$num_prue;";
 					$resultx = mysqli_query($conexion,$sqlx);
 					if($rowx=mysqli_fetch_array($resultx))
+					//var_dump($rowx);
 					{
 						echo'<input type="hidden" name="inser" value="1">';
-						if(eregi($rowx["respuesta"], "1"))
+						if($rowx["respuesta"]=="1")
 						{
 							$OpcionRAVEN1="checked";
 							$OpcionRAVEN2="";
@@ -448,7 +449,7 @@ document.onkeydown=checkKeyCode;
 							$OpcionRAVEN7="";
 							$OpcionRAVEN8="";
 						}
-						else if(eregi($rowx["respuesta"], "2"))
+						else if($rowx["respuesta"]=="2")
 						{
 							$OpcionRAVEN1="";
 							$OpcionRAVEN2="checked";
@@ -459,7 +460,7 @@ document.onkeydown=checkKeyCode;
 							$OpcionRAVEN7="";
 							$OpcionRAVEN8="";
 						}
-						else if(eregi($rowx["respuesta"], "3"))
+						else if($rowx["respuesta"]=="3")
 						{
 							$OpcionRAVEN1="";
 							$OpcionRAVEN2="";
@@ -470,7 +471,7 @@ document.onkeydown=checkKeyCode;
 							$OpcionRAVEN7="";
 							$OpcionRAVEN8="";
 						}
-						else if(eregi($rowx["respuesta"], "4"))
+						else if($rowx["respuesta"]=="4")
 						{
 							$OpcionRAVEN1="";
 							$OpcionRAVEN2="";
@@ -481,7 +482,7 @@ document.onkeydown=checkKeyCode;
 							$OpcionRAVEN7="";
 							$OpcionRAVEN8="";
 						}
-						else if(eregi($rowx["respuesta"], "5"))
+						else if($rowx["respuesta"]=="5")
 						{
 							$OpcionRAVEN1="";
 							$OpcionRAVEN2="";
@@ -492,7 +493,7 @@ document.onkeydown=checkKeyCode;
 							$OpcionRAVEN7="";
 							$OpcionRAVEN8="";
 						}
-						else if(eregi($rowx["respuesta"], "6"))
+						else if($rowx["respuesta"]=="6")
 						{
 							$OpcionRAVEN1="";
 							$OpcionRAVEN2="";
@@ -503,7 +504,7 @@ document.onkeydown=checkKeyCode;
 							$OpcionRAVEN7="";
 							$OpcionRAVEN8="";
 						}
-						else if(eregi($rowx["respuesta"], "7"))
+						else if($rowx["respuesta"]=="7")
 						{
 							$OpcionRAVEN1="";
 							$OpcionRAVEN2="";
@@ -514,7 +515,7 @@ document.onkeydown=checkKeyCode;
 							$OpcionRAVEN7="checked";
 							$OpcionRAVEN8="";
 						}
-						else if(eregi($rowx["respuesta"], "8"))
+						else if($rowx["respuesta"]=="8")
 						{
 							$OpcionRAVEN1="";
 							$OpcionRAVEN2="";
@@ -720,6 +721,7 @@ document.onkeydown=checkKeyCode;
 				else
 				{
 					$sql1 = "INSERT INTO tb_respraven (idraven,idaspirante,idnum_prue,respuesta) VALUES($aux1,'$cod','$num_prue','$ppraven[$i]');";
+					var_dump($sql1);
 					$result1 = @mysqli_query($conexion,$sql1);
 				}
 			}

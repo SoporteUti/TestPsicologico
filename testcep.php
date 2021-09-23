@@ -444,19 +444,19 @@ document.onkeydown=checkKeyCode;
 						if($rowx=mysqli_fetch_array($resultx))
 						{
 							echo'<input type="hidden" name="inser" value="1">';
-							if(preg_match($rowx["respuesta"], "1"))
+							if($rowx["respuesta"]=="1")
 							{
 								$OpcionCEP1="checked";
 								$OpcionCEP2="";
 								$OpcionCEP3="";
 							}
-							else if(preg_match($rowx["respuesta"], "2"))
+							else if($rowx["respuesta"]=="2")
 							{
 								$OpcionCEP1="";
 								$OpcionCEP2="checked";
 								$OpcionCEP3="";
 							}
-							else if(preg_match($rowx["respuesta"], "3"))
+							else if($rowx["respuesta"]=="3")
 							{
 								$OpcionCEP1="";
 								$OpcionCEP2="";

@@ -28,10 +28,14 @@ else
 if(isset( $_GET["var"])){
 	$var= $_GET["var"];
 
+//var_dump($var);
 
-
-
-if($var==1){$_SESSION["testraven"]=false;}elseif($var==2){$_SESSION["testcep"]=false;}
+if($var==1){
+	$_SESSION["testraven"]=false;
+	
+}elseif($var==2){
+	$_SESSION["testcep"]=false;
+}
 }//si esta definida esta variable que aga eso que esta ahi
 ?>
 
