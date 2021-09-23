@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION[acce]==false) 
+if($_SESSION["acce"]==false) 
 {
 	echo "<script language='javascript'>";
     echo"location.href='index.php';";
@@ -8,7 +8,7 @@ if($_SESSION[acce]==false)
 }
 else
 {
-	$cod=$_SESSION[cod];
+	$cod=$_SESSION["cod"];
 }
 
 ?>
@@ -118,7 +118,7 @@ function validar(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla==8) return true;//Tecla de retroceso (para poder borrar)
-    //patron =/[A-Z a-z αινσϊ]/; // Solo acepta letras
+    //patron =/[A-Z a-z οΏ½οΏ½οΏ½οΏ½οΏ½]/; // Solo acepta letras
 	//patron =/[\t\D]/;
 	patron = /\d/;
     te = String.fromCharCode(tecla);

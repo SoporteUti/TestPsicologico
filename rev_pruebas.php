@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION[acce]==false) 
+if($_SESSION["acce"]==false) 
 {
 	echo "<script language='javascript'>";
     echo"location.href='index.php';";
@@ -8,7 +8,7 @@ if($_SESSION[acce]==false)
 }	
 else
 {
-	$cod=$_SESSION[cod];
+	$cod=$_SESSION["cod"];
 }
 ?>
 
@@ -63,9 +63,9 @@ body
 			include("conexion.php");
 			echo'<td><a href="act_aspirante.php"><img src="img/datos.jpg" border="0" class="glossy"></a><br>&nbsp;</td>';
 			$sql="SELECT if(prueba_num=1,'PRIMERA VEZ','SEGUNDA VEZ') as num, prueba_num FROM tb_resultadosa WHERE idaspirante='$cod';";
-			$result0 = mysql_query($sql, $conexion);
+			$result0 = mysqli_query($conexion,$sql);
 			$cont=0;
-			while($row=mysql_fetch_array($result0))
+			while($row=mysqlI_fetch_array($result0))
 			{
 				$cont++;
 				echo'<td>';
@@ -76,9 +76,9 @@ body
 				echo'</td>';
 			}
 			$sql="SELECT if(prueba_num=1,'PRIMERA VEZ','SEGUNDA VEZ') as num, prueba_num FROM tb_resultadosb WHERE idaspirante='$cod';";
-			$result0 = mysql_query($sql, $conexion);
+			$result0 = mysqli_query($conexion,$sql);
 			$cc=0;
-			while($row=mysql_fetch_array($result0))
+			while($row=mysqli_fetch_array($result0))
 			{
 				$cont++;
 				$cc++;
