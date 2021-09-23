@@ -1,7 +1,7 @@
 <?php
 session_start();
-$_SESSION[num_prue] = $_GET['var'];
-if($_SESSION[acce]==false) 
+$_SESSION["num_prue"] = $_GET['var'];
+if($_SESSION["acce"]==false) 
 {
 	echo "<script language='javascript'>";
     echo"location.href='index.php';";
