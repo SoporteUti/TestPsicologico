@@ -349,8 +349,8 @@ span.radio
 			<?php
 				include("conexion.php");
 				$consul="SELECT nit,nombre,apellido,sexo,edad,profesorado FROM tb_aspirantes t where idaspirante=$cod;";
-				$result0 = mysql_query($consul, $conexion);
-				if($row=mysql_fetch_array($result0))
+				$result0 = mysqli_query($conexion,$consul);
+				if($row=mysqli_fetch_array($result0))
 				{
 					$nit=$row['nit'];
 					$nom=$row['nombre'];
@@ -402,8 +402,8 @@ span.radio
               <option value="">Seleccione Profesorado</option>
 				<?php
 					$sqlXX="SELECT * FROM tb_profesorados;";
-					$resultXX = mysql_query($sqlXX, $conexion);
-					while($rowXX=mysql_fetch_array($resultXX))
+					$resultXX = mysqli_query($conexion,$sqlXX);
+					while($rowXX=mysqli_fetch_array($resultXX))
 					{
 						if($prof==$rowXX['cod'])
 						{
@@ -442,6 +442,7 @@ span.radio
 </html>
 
 <?php
+if(isset($_POST['bandera'])){
 $tiempo = time();
 $fecha = date ( "Y/m/j" , $tiempo); 
 
@@ -455,8 +456,8 @@ $prof=$_POST['prof'];
 if($_POST['bandera']=="guardar")
 {
 	$sql="UPDATE tb_aspirantes SET nit='$nit',nombre='$nombre', apellido='$apellido', sexo='$sex', edad='$edad', profesorado='$prof' WHERE idaspirante='$cod';";
-	$result = @mysql_query($sql,$conexion) or die (mysql_error());
-	mysql_close();
+	$result = @mysqli_query($conexion,$sql) or die (mysqli_error($conexion));
+	mysqli_close($conexion);
 
 	echo'<script type="text/JavaScript">';
 	echo'{';
@@ -464,4 +465,5 @@ if($_POST['bandera']=="guardar")
 	echo'}';
 	echo'</script>';
 }
+}//fin isset
 ?>
