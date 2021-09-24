@@ -61,12 +61,14 @@ body
 		
 		<?php
 			include("conexion.php");
+			//var_dump($cod);
 			echo'<td><a href="act_aspirante.php"><img src="img/datos.jpg" border="0" class="glossy"></a><br>&nbsp;</td>';
 			$sql="SELECT if(prueba_num=1,'PRIMERA VEZ','SEGUNDA VEZ') as num, prueba_num FROM tb_resultadosa WHERE idaspirante='$cod';";
 			$result0 = mysqli_query($conexion,$sql);
 			$cont=0;
 			while($row=mysqlI_fetch_array($result0))
 			{
+				//var_dump("entre");
 				$cont++;
 				echo'<td>';
 				echo'<a href="rev_pruebaA.php?var='.$row['prueba_num'].'">';
