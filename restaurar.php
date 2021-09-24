@@ -1,13 +1,14 @@
 <?php
 	session_start();
 	include("conexion.php");
-	if($_SESSION[accessadmon]==false) 
+	if($_SESSION["accessadmon"]==false) 
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='login_admon.php';";
     	echo "</script>";
 	}
 	$status = "";
+	if(isset($_POST['bandera'])){
 	if($_POST['bandera']=="ingresar")
 	{
 		$archivo = $_FILES["archivo"]['name'];
@@ -17,7 +18,7 @@
 			$destino =  "files/1".$prefijo."_".$archivo;
 			if (copy($_FILES['archivo']['tmp_name'],$destino)) 
 			{
-				$command = 'mysql.exe --password=root --user=root dbtestspsicologico < '.$destino;
+				$command = 'mysql.exe --password=UTIFMP --user=root dbtestspsicologico < '.$destino;
 				passthru($command,$error);
 				$status = "OK: Se a restaurado con exito la base de datos.";
 				if ($error) 
@@ -35,6 +36,7 @@
 			$status = "ERROR: Debes de seleccionar el archivo a restaurar.";
 		}
 	}
+}//fin isset
 ?>
 <html>
 <head>
