@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if($_SESSION[accessadmon]==false) 
+	if($_SESSION["accessadmon"]==false) 
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='login_admon.php';";
@@ -8,9 +8,9 @@
 	}
 	else
 	{
-		$nombreadmon   = $_SESSION[nombreadmon];
-		$apellidoadmon = $_SESSION[apellidoadmon]; 
-		$id = $_SESSION[idadmon];
+		$nombreadmon   = $_SESSION["nombreadmon"];
+		$apellidoadmon = $_SESSION["apellidoadmon"]; 
+		$id = $_SESSION["idadmon"];
 	}
 include("conexion.php");
 ?>
@@ -119,7 +119,7 @@ function validar(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla==8) return true;//Tecla de retroceso (para poder borrar)
-    //patron =/[A-Z a-z &aacute;éíóú]/; // Solo acepta letras
+    //patron =/[A-Z a-z &aacute;ï¿½ï¿½ï¿½ï¿½]/; // Solo acepta letras
 	//patron =/[\t\D]/;
 	patron = /\d/;
     te = String.fromCharCode(tecla);
@@ -306,7 +306,7 @@ span.radio
 		}	
 		else if(document.Fadmon.txtpass.value != document.Fadmon.txtpass2.value)
 		{
-			Sexy.alert('LAS CONTRASEÑAS NO COINCIDEN...');
+			Sexy.alert('LAS CONTRASEï¿½AS NO COINCIDEN...');
 		}
 		else
 		{
@@ -358,16 +358,24 @@ span.radio
 				<center>
 	
 <?php
+$rr2="";
+$rr1="";
 	$sql = "SELECT * FROM tb_admon;";
-	$result0 = mysql_query($sql, $conexion);
-	if($row=mysql_fetch_array($result0))
+	$result0 = mysqli_query($conexion,$sql);
+	if($row=mysqli_fetch_array($result0))
 	{
 $id=$row['id'];	$nom=$row['nombre'];$tel=$row['tel'];$car=$row['cargo'];$sex=$row['sexo'];$usu=$row['usu'];$pass=$row['pass'];
 $aux="ocultar";$passaux="12345678";
 echo'<input type="hidden" name="act" value="'.$id.'">';
 echo'<input type="hidden" name="password" value="'.$row['pass'].'">';
 
-	if($sex=="1"){$rr1="checked";}else if($sex=="0"){$rr2="checked";}else{$rr2="";$rr1="";}
+	if($sex=="1"){
+		$rr1="checked";
+	}else if($sex=="0"){
+		$rr2="checked";
+	}else{
+		$rr2="";
+		$rr1="";}
 }
 ?>
 				
@@ -444,6 +452,7 @@ echo'<input type="hidden" name="password" value="'.$row['pass'].'">';
 </html>
 
 <?php
+if(isset($_POST['bandera'])){
 $nombre=$_POST['txtnombre'];
 $sex=$_POST['sexo'];
 $tel=$_POST['txttel'];
@@ -457,12 +466,13 @@ if($_POST['bandera']=="actualizar")
 {
 	if($pass1=="12345678"){$ppaass=''.$passhiden;}else{$ppaass= md5($pass1);}
 	$sql = "UPDATE tb_admon SET nombre='$nombre',sexo='$sex',tel='$tel',cargo='$cargo',usu='$usu',pass='$ppaass' WHERE id='$id';";
-	$result = @mysql_query($sql,$conexion) or die (mysql_error());
-	mysql_close();
+	$result = @mysqli_query($conexion,$sql);
+	mysqli_close($conexion);
 	echo'<script type="text/JavaScript">';
 	echo'{';
 		echo"location.href='reg_admon.php';";
 	echo'}';
 	echo'</script>';
 }
+}//fin isset
 ?>

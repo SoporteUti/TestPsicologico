@@ -230,8 +230,8 @@ span.radio
 				<?php
 					include("conexion.php");
 					$ss="SELECT distinct(fecha) FROM tb_aspirantes;";
-					$result0 = mysql_query($ss, $conexion);
-					while($row=mysql_fetch_array($result0))
+					$result0 = mysqli_query($conexion,$ss);
+					while($row=mysqli_fetch_array($result0))
 					{
 						echo'<option value="'.$row['fecha'].'">'.$row['fecha'].'</option>';	
 					}
@@ -266,6 +266,8 @@ span.radio
 </tr>
 <?php
 include("conexion.php");
+if(isset($_REQUEST["bandera"])){
+	
 $bandera=$_REQUEST["bandera"];
 
 if($_POST['bandera']=="consulta")
@@ -273,15 +275,14 @@ if($_POST['bandera']=="consulta")
 	$fecha=$_POST['fec'];
 	$consul='SELECT idaspirante,apellido,nombre,edad,sexo,dfinal,prue,num_prue,profesorado FROM todos where fecha="'.$fecha.'";';
 }
-else
-{
+
+}else{
 	$consul='SELECT idaspirante,apellido,nombre,edad,sexo,dfinal,prue,num_prue,profesorado FROM todos;';
 }
 
-
-$result0 = mysql_query($consul, $conexion);
+$result0 = mysqli_query($conexion,$consul);
 $i=0;
-while($row=mysql_fetch_array($result0))
+while($row=mysqli_fetch_array($result0))
 {
 ?>						
 <tr <?php if (($i%2)==0) {?>class="modo1" <?php }else {?> class="modo2" <?php } ?> onMouseOver="this.className='modo3'" onMouseOut="<?php if (($i%2)==0) {?>this.className='modo1' <?php } else { ?> this.className='modo2'<?php } ?> ">
@@ -290,8 +291,8 @@ while($row=mysql_fetch_array($result0))
 	{
 		$sql='SELECT COUNT(*) AS num FROM tb_respraven t1 INNER JOIN tb_raven t2 ON t1.idraven=t2.idraven AND t1.respuesta=t2.respuesta 
       	WHERE t1.idaspirante='.$row['idaspirante'].' AND  t1.idnum_prue='.$row['num_prue'].';';
-		$rrr = mysql_query($sql, $conexion);
-		if($rowX=mysql_fetch_array($rrr))
+		$rrr = mysqli_query($conexion,$sql);
+		if($rowX=mysqli_fetch_array($rrr))
 		{
 			$numcep = $rowX['num'];
 		}
@@ -300,8 +301,8 @@ while($row=mysql_fetch_array($result0))
 	{
 		$sql='SELECT COUNT(*) AS num FROM tb_respotis t1 INNER JOIN tb_otis t2 ON t1.idotis=t2.idotis AND t1.respuesta=t2.respuesta 
 		WHERE t1.idaspirante='.$row['idaspirante'].' AND  t1.idnum_prue='.$row['num_prue'].';';
-		$rrr = mysql_query($sql, $conexion);
-		if($rowX=mysql_fetch_array($rrr))
+		$rrr = mysqli_query($conexion,$sql);
+		if($rowX=mysqli_fetch_array($rrr))
 		{
 			$numcep = $rowX['num'];
 		}
@@ -323,7 +324,7 @@ echo'<td><a href="resultadosT.php?var='.$row['idaspirante'].'&var1='.$row['num_p
 echo'</tr>';
 //}
 }
-mysql_free_result($result0) or die (mysql_error());
+mysqli_free_result($result0);
 ?>
 </table>
 </div>
