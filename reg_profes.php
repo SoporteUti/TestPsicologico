@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if($_SESSION[accessadmon]==false) 
+	if($_SESSION["accessadmon"]==false) 
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='login_admon.php';";
@@ -8,9 +8,9 @@
 	}
 	else
 	{
-		$nombreadmon   = $_SESSION[nombreadmon];
-		$apellidoadmon = $_SESSION[apellidoadmon]; 
-		$id = $_SESSION[idadmon];
+		$nombreadmon   = $_SESSION["nombreadmon"];
+		$apellidoadmon = $_SESSION["apellidoadmon"]; 
+		$id = $_SESSION["idadmon"];
 	}
 include("conexion.php");
 ?>
@@ -119,7 +119,7 @@ function validar(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla==8) return true;//Tecla de retroceso (para poder borrar)
-    //patron =/[A-Z a-z áéíóú]/; // Solo acepta letras
+    //patron =/[A-Z a-z ï¿½ï¿½ï¿½ï¿½ï¿½]/; // Solo acepta letras
 	//patron =/[\t\D]/;
 	patron = /\d/;
     te = String.fromCharCode(tecla);
@@ -377,19 +377,22 @@ span.radio
 			<!--INICIO DEL CONTENIDO-->
 			<?php
 				include("conexion.php");
+				$flag=false; $ccod="";$nom2="";
+				if(isset($_GET['var'])){
 				$ccod=$_GET['var'];
 				if($ccod==null){$flag=false; $ccod="";$nom2="";}
 				else 
 				{
 					$flag=true;
 					$ssql="SELECT cod,nombre FROM tb_profesorados WHERE cod='$ccod';";
-					$result3 = mysql_query($ssql, $conexion);
-					if($row=mysql_fetch_array($result3))
+					$result3 = mysqli_query($conexion,$ssql);
+					if($row=mysqli_fetch_array($result3))
 					{
 						$nom2=''.$row['nombre'];
 					}
-					mysql_free_result($result3) or die (mysql_error());
+					mysqli_free_result($result3);
 				}
+			}//fin isset
 				$consul='SELECT cod,nombre FROM tb_profesorados ORDER BY cod ASC;';
 			?>
 			<table width="840" border="0" cellpadding="0" cellspacing="0">
@@ -460,9 +463,9 @@ span.radio
 </tr>
 
 <?php
-$result0 = mysql_query($consul, $conexion);
+$result0 = mysqli_query($conexion,$consul);
 $i=0;
-while($row=mysql_fetch_array($result0))
+while($row=mysqli_fetch_array($result0))
 {
 ?>						
 <tr <?php if (($i%2)==0) {?>class="modo1" <?php }else {?> class="modo2" <?php } ?> onMouseOver="this.className='modo3'" onMouseOut="<?php if (($i%2)==0) {?>this.className='modo1' <?php } else { ?> this.className='modo2'<?php } ?> ">
@@ -473,7 +476,7 @@ echo'<td>'.$row['nombre'].'</td>';
 echo'<td><a href="reg_profes.php?var='.$row['cod'].'"><img src="img/lupa.gif" border="0" width="20" height="20"></a></td>';
 echo'</tr>';
 }
-mysql_free_result($result0) or die (mysql_error());
+mysqli_free_result($result0);
 ?>
 
 </table>
@@ -504,31 +507,33 @@ mysql_free_result($result0) or die (mysql_error());
 </html>
 
 <?php
+if(isset($_POST['bandera'])){
 $cod=$_POST['codigo'];
 $nom=$_POST['nombre'];
 $flag=false;
 if($_POST['bandera']=="guardar")
 {
+	//var_dump($cod);
 	$sqlx="SELECT * FROM tb_profesorados WHERE cod='$cod';";
-	$result3 = mysql_query($sqlx, $conexion);
-	if($row=mysql_fetch_array($result3))
+	$result3 = mysqli_query($conexion,$sqlx);
+	if($row=mysqli_fetch_array($result3))
 	{
 		$flag=true;
 	}
-	$result3 = @mysql_query($sqlx,$conexion) or die (mysql_error());
-	mysql_close();
+	$result3 = @mysqli_query($conexion,$sqlx);
+
 	if($flag==false)
 	{
 		$sql = "INSERT INTO tb_profesorados (cod,nombre) VALUES('$cod','$nom');";
-		$result = @mysql_query($sql,$conexion) or die (mysql_error());
-		mysql_close();
+		$result = @mysqli_query($conexion,$sql);
+		
 		echo'<script type="text/JavaScript">';
 		echo'{';
 			echo"location.href='reg_profes.php';";
 		echo'}';
 		echo'</script>';
-		$result = @mysql_query($sql,$conexion) or die (mysql_error());
-		mysql_close();
+		$result = @mysqli_query($conexion,$sql);
+		
 	}
 	else
 	{
@@ -542,8 +547,8 @@ if($_POST['bandera']=="guardar")
 if($_POST['bandera']=="actualizar")
 {
 	$sql = "UPDATE tb_profesorados SET nombre='$nom' WHERE cod='$cod';";
-	$result = @mysql_query($sql,$conexion) or die (mysql_error());
-	mysql_close();
+	$result = @mysqli_query($conexion,$sql);
+	
 	echo'<script type="text/JavaScript">';
 	echo'{';
 		echo"location.href='reg_profes.php?var=$cod';";
@@ -553,18 +558,18 @@ if($_POST['bandera']=="actualizar")
 if($_POST['bandera']=="eliminar")
 {
 	$sqlx="SELECT * FROM tb_aspirantes WHERE profesorado='$cod';";
-	$result3 = mysql_query($sqlx, $conexion);
-	while($row=mysql_fetch_array($result3))
+	$result3 = mysqli_query($conexion,$sqlx);
+	while($row=mysqli_fetch_array($result3))
 	{
 		$flag=true;
 	}
-	$result3 = @mysql_query($sqlx,$conexion) or die (mysql_error());
-	mysql_close();
+	$result3 = @mysqli_query($conexion,$sqlx);
+
 	if($flag==false)
 	{	
 		$sql = "DELETE FROM tb_profesorados WHERE cod='$cod';";
-		$result = @mysql_query($sql,$conexion) or die (mysql_error());
-		mysql_close();
+		$result = @mysqli_query($conexion,$sql);
+	
 		echo'<script type="text/JavaScript">';
 		echo'{';
 			echo"location.href='reg_profes.php';";
@@ -580,4 +585,6 @@ if($_POST['bandera']=="eliminar")
 		echo'</script>';
 	}
 }
+
+}//fin isset
 ?>
