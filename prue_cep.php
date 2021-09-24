@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if($_SESSION[acce]==false) 
+	if($_SESSION["acce"]==false) 
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='index.php';";
@@ -8,8 +8,8 @@
 	}
 	else
 	{
-		$cod = $_SESSION[cod];
-		$num_prue = $_SESSION[num_prue];
+		$cod = $_SESSION["cod"];
+		$num_prue = $_SESSION["num_prue"];
 	}
 //	echo $_SESSION[cod];
 ?>
@@ -208,8 +208,8 @@ window.onload = Custom.init;
 			<?php
 				include('conexion.php');
 				$consul='select apellido,nombre from tb_aspirantes where idaspirante="'. $cod .'";';
-				$result0 = mysql_query($consul, $conexion);
-				if($row=mysql_fetch_array($result0))
+				$result0 = mysqli_query($conexion,$consul);
+				if($row=mysqli_fetch_array($result0))
 				{
 					$nom = $row['apellido'].' '.$row['nombre'];
 				}
@@ -229,51 +229,51 @@ window.onload = Custom.init;
 				echo'<tr>';
 				echo'<td width="10%" style=" border:1px solid #000000"><b>ACIERTOS</td>';
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='C' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 echo'<td style=" border:1px solid #000000"><b><center>'.$numcep.'</td>';
 
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='E' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 echo'<td style=" border:1px solid #000000"><b><center>'.$numcep.'</td>';
 
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='P' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 echo'<td style=" border:1px solid #000000"><b><center>'.$numcep.'</td>';
 
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='S' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 echo'<td style=" border:1px solid #000000"><b><center>'.$numcep.'</td>';
 
 $sql="SELECT COUNT(*) AS num FROM tb_respcep t1 INNER JOIN tb_respcepcorrectas t2 ON t1.idcep=t2.id AND t1.respuesta=t2.respuesta WHERE t1.idaspirante='$cod' AND escala='?' AND t1.idnum_prue='$num_prue';";
-$result = mysql_query($sql, $conexion);
-if($row=mysql_fetch_array($result))
+$result = mysqli_query($conexion,$sql);
+if($row=mysqli_fetch_array($result))
 {
 	$numcep = $row['num'];
 }
-mysql_free_result($result) or die (mysql_error());
+mysqli_free_result($result);
 
 echo'<td style=" border:1px solid #000000"><b><center>'.$numcep.'</td>';
 echo'</tr>';
@@ -288,9 +288,9 @@ echo'</table>';
 				echo'<div id="Layer1" style="width:700px; height:260px; overflow: scroll;">';		
 				echo'<table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla">';			
 $consul='select t1.idcep c1,t2.preguntas c2,t1.respuesta c3 from tb_respcep as t1 inner join tb_cep as t2 on t1.idcep=t2.idcep where t1.idaspirante="'. $cod .'" and t1.idnum_prue="'. $num_prue. '";';
-				$result0 = mysql_query($consul, $conexion);
+				$result0 = mysqli_query($conexion,$consul);
 				$i=0;
-				while($row=mysql_fetch_array($result0))
+				while($row=mysqli_fetch_array($result0))
 				{
 			?>						
 <tr <?php if (($i%2)==0) {?>class="modo1" <?php }else {?> class="modo2" <?php } ?> onMouseOver="this.className='modo3'" onMouseOut="<?php if (($i%2)==0) {?>this.className='modo1' <?php } else { ?> this.className='modo2'<?php } ?> ">

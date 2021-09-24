@@ -11,12 +11,14 @@
 		$cod = $_SESSION["cod"];
 		$num_prue = $_SESSION["num_prue"];
 	}
+	if(isset($_SESSION["testraven"]) || isset($_SESSION["testcep"])){
 	if($_SESSION["testraven"]==true || $_SESSION["testcep"]==true)  
 	{
 		echo "<script language='javascript'>";
 	    echo"location.href='error_pruebaB.php';";
     	echo "</script>";
 	}
+    }//fin isset()
 //	$num_prue=1;
 //	$cod="0001";
 	require('fpdf/fpdf.php');
