@@ -205,15 +205,11 @@ input:focus
 			Sexy.alert('DEBE ESCRIBIR EL NUMERO DE ASPIRANTE...');
 			document.Flogin.txtaspirante.focus();
 		}
-		else if (document.Flogin.txtnit2.value=="")
+		else if (document.Flogin.txtano2.value=="")
 		{
 // 			alert('DEBE ESCRIBIR LA CONTRASE�A..');
-			Sexy.alert('DEBE ESCRIBIR SU NUMERO DE NIT....');
-			document.Flogin.txtnit2.focus();
-		}
-		else if( !(/^\d{4}-\d{6}-\d{3}-\d{1}$/.test(document.Flogin.txtnit2.value)) ) 
-		{
-			Sexy.alert('DEBES DE ESCRIBIR CORRECTAMENTE EL NUMERO DE NIT, FORMATO:###-######-###-#...');
+			Sexy.alert('DEBE ESCRIBIR SU AÑO DE INGRESO EJ:2022....');
+			document.Flogin.txtano2.focus();
 		}
 		else
 		{
@@ -311,13 +307,13 @@ if(d.valant != d.value){
 			  <table width="351" border="0" cellpadding="0" cellspacing="0">
 			  <tr>
 				  <td width="146"  height="30"><label for="lbnombre" class="label2">
-					N� Aspirante:</label></td>
+					N° Aspirante:</label></td>
 			  	  <td width="201"  height="30">
 					<input name="txtaspirante" type="text" class="texto1" id="txtaspirante" onKeyPress="return validar(event)" size="6"  maxlength="6"/> </td>
 			  </tr>
 			  <tr>
-			  	<td height="30"><label for="ape" class="label2">NIT:</label></td>
-			  	<td height="30"><input name="txtnit2" type="text" class="texto1" id="txtnit2" size="30"  maxlength="17"  />	</td>
+			  	<td height="30"><label for="ape" class="label2">Año de Ingreso:</label></td>
+			  	<td height="30"><input name="txtano2" type="text" class="texto1" id="txtano2" size="30"  maxlength="4"  />	</td>
 			</tr>
 			  <tr>
 			  <td colspan="2"><center><input type="button" name="Submit" value="Ingresar" class="button" onclick= "ingresar(Flogin)" />			<input type="button" name="Submit" value="Salir" class="button" onClick="volver();" /></center></td>
@@ -353,12 +349,12 @@ $fecha = date ( "Y/m/j" , $tiempo);
 
 include("conexion.php");
 $naspirante=$_POST['txtaspirante'];
-$nit2=$_POST['txtnit2'];
+$ano=$_POST['txtano2'];
 $flag=false;
 
 if($_POST['bandera']=="ingresar")
 {
-		$sql="SELECT * FROM tb_aspirantes WHERE idaspirante='$naspirante' AND nit='$nit2';";
+		$sql="SELECT * FROM tb_aspirantes WHERE idaspirante='$naspirante' AND ano='$ano';";
 		$result0 = mysqli_query($conexion,$sql);
 		if($row=mysqli_fetch_array($result0))
 		{
@@ -381,7 +377,7 @@ if($_POST['bandera']=="ingresar")
 				$_SESSION["apellido"] = $row['apellido']; 
 				$_SESSION["nit"] = $row['nit'];
 				$_SESSION["numpageotis"] = 0;
-					$_SESSION["numpageepq"] = 0;
+				$_SESSION["numpageepq"] = 0;
 				$_SESSION["numpageraven"] = 0;
 				$_SESSION["numpagecep"] = 0;
 				$_SESSION["num_prue"] = 1;

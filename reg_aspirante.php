@@ -315,14 +315,6 @@ color:#666666;
  		{
 			Sexy.alert('DEBE ESCRIBIR EL NUMERO DE ASPIRANTE...');
 		}
-		else if (document.Faspirante.txtnit.value=="")
- 		{
-			Sexy.alert('DEBE ESCRIBIR EL NIT...');
-		}
-		else if( !(/^\d{4}-\d{6}-\d{3}-\d{1}$/.test(document.Faspirante.txtnit.value)) ) 
-		{
-			Sexy.alert('DEBES DE ESCRIBIR CORRECTAMENTE EL NUMERO DE NIT, FORMATO:###-######-###-#...');
-		}
 		else if (document.Faspirante.txtnombre.value=="")
  		{
 			Sexy.alert('DEBE ESCRIBIR EL NOMBRE...');
@@ -332,6 +324,9 @@ color:#666666;
 			Sexy.alert('DEBE ESCRIBIR EL APELLIDO...');
 		}
 		else if (document.Faspirante.edad.value=="" || document.Faspirante.prof.value=="")
+		{
+			Sexy.alert('DEBE DE LLENAR TODOS LOS CAMPOS...');
+		}	else if (document.Faspirante.ingreso.value=="" || document.Faspirante.prof.value=="")
 		{
 			Sexy.alert('DEBE DE LLENAR TODOS LOS CAMPOS...');
 		}
@@ -391,7 +386,7 @@ color:#666666;
 			  <legend align="center">REGISTRO DE ASPIRANTE</legend> 
 			  <br>
 			  <form name="Faspirante" method="post" action=""><input type="hidden" name="bandera"> 
-				<table width="840" border="0" cellspacing="0" cellpadding="0">
+				<table width="850" border="0" cellspacing="0" cellpadding="0">
 				  <tr>
 				    <td width="15%" height="30" align="right"><label class="label1">No Aspirante:
 				      </label></td>
@@ -422,7 +417,8 @@ color:#666666;
 				    <td height="30"><label class="label2">Edad (a&ntilde;os):
 				      </label></td>
 				    <td height="30"><input name="edad" type="text" class="texto1" id="edad" onKeyPress="return validar(event)" size="5" maxlength="2"></td>
-				  </tr>
+					
+				</tr>
 		</table>
 		<table width="840" border="0" cellspacing="0" cellpadding="0">
 		<tr>
@@ -447,10 +443,24 @@ color:#666666;
 				?>
             </select></td>
 		  </tr>
+		  <td height="30"><label class="label2">A&ntilde;o de Ingreso:
+				      </label></td>
+				    <td height="30"><input name="ingreso" type="text" class="texto1" id="ingreso" onKeyPress="return validar(event)" size="5" maxlength="4"></td>
+					
+		  <tr>
+
+		  </tr>
 		</table>
 	    <input type="button" name="Submit" value="Registrar" class="button" onclick= "guardar();" />
 		<input type="button" name="Submit" value="Salir" class="button" onClick="volver();" />
 		</form>
+<!--Mensaje de que nit no es obligatorio-->
+		<table width="750" border="0"><tr><td>
+			<tr><td><center><b><font size="+1"  color="#FF0000">
+				NIT:CAMPO NO OBLIGATORIO, AÑO DE INGRESO: CAMPO OBLIGATORIO EJ:2022
+			</b></center></td></tr>
+		</table>
+<!--Mensaje de que nit no es obligatorio fin-->
 		      <table width="100%" border="0" cellpadding="0" cellspacing="0">
               <tr>
                 <td width="56%">&nbsp;</td>
@@ -494,6 +504,7 @@ $nombre=$_POST['txtnombre'];
 $apellido=$_POST['txtapellido'];
 $sex=$_POST['sexo'];
 $edad=$_POST['edad'];
+$ano=$_POST['ingreso'];
 $prof=$_POST['prof'];
 $flag=false;
 
@@ -527,7 +538,7 @@ if($_POST['bandera']=="guardar")
 
 	if($flag==false)
 	{
-		$sql = "INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,sexo,edad,profesorado) 		VALUES('$numfin','$nit','$nombre','$apellido','$sex','$edad','$prof');";
+		$sql = "INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,sexo,edad,ano,profesorado) 		VALUES('$numfin','$nit','$nombre','$apellido','$sex','$edad','$ano','$prof');";
 		$result = @mysqli_query($conexion,$sql);
 		mysqli_close($conexion);
 
