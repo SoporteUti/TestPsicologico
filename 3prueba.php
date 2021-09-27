@@ -294,6 +294,7 @@ if(isset($_POST['cod'])){
 $codigo=$_POST['cod'];
 $ano=$_POST['ano'];
 $flag=false;
+$flag2=true;
 	$sqlx="SELECT idaspirante FROM tb_aspirantes WHERE idaspirante='$codigo' AND ano='$ano';";
 	$result3 = mysqli_query($conexion,$sqlx);
 	if($row=mysqli_fetch_array($result3))
@@ -311,7 +312,17 @@ if($_POST['bandera']=="ingresar")
 		$flag=true;
 	}
 	$result3 = @mysqli_query($conexion,$sqlx);
-	
+
+    //para validar que ya se hizo la tercera prueba
+    $sqlx3="SELECT * FROM tb_auxresultados WHERE num_prue=3 AND idaspirante='$idaspirante';";
+	$result33 = mysqli_query($conexion,$sqlx3);
+	if($row=mysqli_fetch_array($result33))
+	{
+		$flag2=false;
+	}
+	$result3 = @mysqli_query($conexion,$sqlx3);
+    //fin de validar que
+	if($flag2==true){
 	if($flag==true)
 	{
 		$sql="SELECT * FROM tb_aspirantes WHERE idaspirante='$codigo' AND ano='$ano';";
@@ -359,6 +370,13 @@ if($_POST['bandera']=="ingresar")
 			echo'}';
 			echo'</script>';	
 	}
+}else{
+    echo'<script type="text/JavaScript">';
+    echo'{';
+        echo"alert('ERROR: NO HA REALIZADO LA PRUEBA 2 O YA REALIZASTES PRUEBAS PERMITIDAS POR EL SISTEMA...');";
+    echo'}';
+    echo'</script>'; 
+}
 }//if bandera
 }//if isset
 ?>
