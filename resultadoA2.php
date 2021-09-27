@@ -190,6 +190,7 @@ elseif($ddia==25){ $diax=utf8_decode("a los veinticinco días del mes de"); }	el
 elseif($ddia==27){ $diax=utf8_decode("a los veintisiete días del mes de"); }	elseif($ddia==28){ $diax=utf8_decode("a los veintiocho días del mes de"); }	
 elseif($ddia==29){ $diax=utf8_decode("a los veintinueve días del mes de"); }	elseif($ddia==30){ $diax=utf8_decode("a los treinta días del mes de"); }	
 elseif($ddia==31){ $diax=utf8_decode("a los treinta y uno días del mes de");}
+
 $mm ="".date("m"); 
 if($mm == "01"){ $mesx=" enero"; }			elseif($mm == "02"){ $mesx=" febrero"; }
 elseif($mm == "03"){ $mesx=" marzo"; }		elseif($mm == "04"){ $mesx=" abril"; }

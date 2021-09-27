@@ -78,6 +78,15 @@ body
 					</a>			  			
 				</td>
 			</tr>
+			<!--habilitando 3 prueba-->
+			<tr>
+				<td>
+					<a href="3prueba.php">
+						<img src="img/2prueba.jpg" border="0" class="glossy">
+					</a>			  			
+				</td>
+			</tr>
+			<!--Fin de habilitar 3 prueba-->
 			<tr>
 				<td>
 					<a href="aspirantes.php" target="_blank">
