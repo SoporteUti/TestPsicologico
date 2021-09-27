@@ -60,13 +60,13 @@ body
 		<tr>
 		
 		<?php
-			include("conexion.php");
+			include_once("conexion.php");
 			//var_dump($cod);
 			echo'<td><a href="act_aspirante.php"><img src="img/datos.jpg" border="0" class="glossy"></a><br>&nbsp;</td>';
-			$sql="SELECT if(prueba_num=1,'PRIMERA VEZ','SEGUNDA VEZ') as num, prueba_num FROM tb_resultadosa WHERE idaspirante='$cod';";
+			$sql="SELECT if(prueba_num=1,'PRIMERA VEZ','SEGUNDA VEZ') as num, prueba_num FROM tb_resultadosa WHERE idaspirante='$cod' AND prueba_num!=3;";
 			$result0 = mysqli_query($conexion,$sql);
 			$cont=0;
-			while($row=mysqlI_fetch_array($result0))
+			while($row=mysqli_fetch_array($result0))
 			{
 				//var_dump("entre");
 				$cont++;
@@ -77,6 +77,23 @@ body
 				echo'<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row['num'];
 				echo'</td>';
 			}
+			/*Realizar la activación de tercera prueba */
+			$sql0="SELECT * FROM `resultadosa` WHERE idaspirante='$cod' AND prueba_num=3; ";
+			$result00 = mysqli_query($conexion,$sql0);
+			
+			while($row0=mysqli_fetch_array($result00))
+			{
+				//var_dump("entre");
+				$cont++;
+				echo'<td>';
+				echo'<a href="rev_pruebaA.php?var='.$row0['prueba_num'].'">';
+				echo'<img src="img/A.jpg" border="0" class="glossy">';
+				echo'</a>';
+				echo'<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TERCERA PRUEBA';
+				echo'</td>';
+			}
+			/*fin de realizar activacion de tercera prueba */
+			
 			$sql="SELECT if(prueba_num=1,'PRIMERA VEZ','SEGUNDA VEZ') as num, prueba_num FROM tb_resultadosb WHERE idaspirante='$cod';";
 			$result0 = mysqli_query($conexion,$sql);
 			$cc=0;
@@ -91,6 +108,9 @@ body
 				echo'<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row['num'];
 				echo'</td>';
 			}
+			/*PROBANDO LA TERCERA PRUEBA */
+			
+			/*FIN DE PROBANDO LA TERCERA PRUEBA*/
 			if($cont<2)
 			{
 				echo'<td>';
