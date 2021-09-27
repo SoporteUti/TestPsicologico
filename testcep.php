@@ -16,6 +16,7 @@ session_start();
 //		$segundosX = $_SESSION[s];
 		$numpageX = $_SESSION["numpagecep"];
 		$num_prue = $_SESSION["num_prue"];
+		//var_dump($num_prue);
 	}
 
 ?>

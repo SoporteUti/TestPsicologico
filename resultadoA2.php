@@ -72,13 +72,13 @@ class PDF extends FPDF
 }
 $pdf=new PDF();
 $title='UNIVERSIDAD DE EL SALVADOR';
-$title2='Vicerrectoria Acad�mica';
+$title2= utf8_decode('Vicerrectoria Académica');
 $title3='Unidad de Ingreso Universitario';
-$title4='RESULTADO DE EVALUACI�N PSICOL�GICA';
+$title4=utf8_decode('RESULTADO DE EVALUACIÓN PSICOLÓGICA');
 $tiempo = time();
 $anno = date ( "Y" , $tiempo);
 $anno= $anno + 1; 
-$title5='A�O ACAD�MICO '.$anno;
+$title5=utf8_decode('AÑO ACADÉMICO '.$anno);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	$consul="SELECT nombre,apellido, if(sexo='M','Masculino','Femenino') as sex,profesorado FROM tb_aspirantes WHERE idaspirante='$cod';";
@@ -131,7 +131,7 @@ $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 $pdf->Cell(0,20,'Aspirante No.: '.$cod,0,1);
 
-$tex0='El suscrito encargado del realizar la Prueba Psicol�gica a los aspirantes a estudiar las carreras de PROFESORADO  en la Facultad ';
+$tex0=utf8_decode('El suscrito encargado del realizar la Prueba Psicológica a los aspirantes a estudiar las carreras de PROFESORADO  en la Facultad ');
 $tex1=', Ingreso ';
 $tex2 = '. CERTIFICA QUE: ';
 $tex3 = $tex0.$fac.$tex1.$anno.$tex2;
@@ -143,7 +143,7 @@ $pdf->Cell(0,-5,''.strtoupper($ape).'  '.strtoupper($name),0,1);
 
 $pdf->SetFont('Times','',12);
 $pdf->SetY(110);
-$pdf->Cell(0,20,'G�nero: '.$ss,0,1);
+$pdf->Cell(0,20,utf8_decode('Género: '.$ss),0,1);
 
 $pdf->Cell(0,10,'Aspirante a ingresar al Profesorado en:',0,1);
 
@@ -153,12 +153,12 @@ $pdf->Ln();
 $pdf->SetX(0);
 $pdf->SetX(20);
 
-$pdf->Cell(0,15,'C�digo: '.$prof);
+$pdf->Cell(0,15,utf8_decode('Código: '.$prof));
 
 $pdf->SetX(0);
 $pdf->SetX(20);
 $pdf->Ln(20);
-$tex="Se someti� a la Prueba Psicol�gica de Personalidad e Inteligencia tal como los dispone el Ministerio de Educaci�n.";
+$tex=utf8_decode("Se sometió a la Prueba Psicológica de Personalidad e Inteligencia tal como los dispone el Ministerio de Educación.");
 $pdf->MultiCell(0,5,$tex);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,22 +174,22 @@ $pdf->Cell(0,20,'Obteniendo un resultado de: '.$dfinalpdf.'.',0,1);
 
 ///////////////////////////////////////FECHA EN LETRAS///////////////////////////////////////////////////////////////////////////////////////////////
 $ddia = date("d"); 
-if($ddia==1){ $diax="al primer d�a del mes de"; }				elseif($ddia==2){ $diax="a los dos d�as del mes de"; }
-elseif($ddia==3){ $diax="a los tres d�as del mes de"; } 		elseif($ddia==4){ $diax="a los cuatro d�as del mes de"; }
-elseif($ddia==5){ $diax="a los cinco d�as del mes de"; }		elseif($ddia==6){ $diax="a los seis d�as del mes de"; }
-elseif($ddia==7){ $diax="a los siete d�as del mes de"; }		elseif($ddia==8){ $diax="a los ocho d�as del mes de"; }
-elseif($ddia==9){ $diax="a los nueve d�as del mes de"; }		elseif($ddia==10){ $diax="a los diez d�as del mes de"; }
-elseif($ddia==11){ $diax="a los once d�as del mes de"; }		elseif($ddia==12){ $diax="a los doce d�as del mes de"; }
-elseif($ddia==13){ $diax="a los trece d�as del mes de"; }		elseif($ddia==14){ $diax="a los catorce d�as del mes de"; }
-elseif($ddia==15){ $diax="a los quince d�as del mes de"; }		elseif($ddia==16){ $diax="a los dieciseis d�as del mes de"; }
-elseif($ddia==17){ $diax="a los diecisiete d�as del mes de"; }	elseif($ddia==18){ $diax="a los dieciocho d�as del mes de"; }	
-elseif($ddia==19){ $diax="a los diecinueve d�as del mes de"; }	elseif($ddia==20){ $diax="a los veinte d�as del mes de"; }	
-elseif($ddia==21){ $diax="a los veintiuno d�as del mes de"; }	elseif($ddia==22){ $diax="a los veintidos  d�as del mes de"; }	
-elseif($ddia==23){ $diax="a los veintitres d�as del mes de"; }	elseif($ddia==24){ $diax="a los veinticuatro d�as del mes de"; }	
-elseif($ddia==25){ $diax="a los veinticinco d�as del mes de"; }	elseif($ddia==26){ $diax="a los veintiseis d�as del mes de"; }	
-elseif($ddia==27){ $diax="a los veintisiete d�as del mes de"; }	elseif($ddia==28){ $diax="a los veintiocho d�as del mes de"; }	
-elseif($ddia==29){ $diax="a los veintinueve d�as del mes de"; }	elseif($ddia==30){ $diax="a los treinta d�as del mes de"; }	
-elseif($ddia==31){ $diax="a los treinta y uno d�as del mes de";}
+if($ddia==1){ $diax=utf8_decode("al primer día del mes de"); }  elseif($ddia==2){ $diax=utf8_decode("a los dos días del mes de"); }
+elseif($ddia==3){ $diax=utf8_decode("a los tres días del mes de"); } 		elseif($ddia==4){ $diax=utf8_decode("a los cuatro días del mes de"); }
+elseif($ddia==5){ $diax=utf8_decode("a los cinco días del mes de"); }		elseif($ddia==6){ $diax=utf8_decode("a los seis días del mes de"); }
+elseif($ddia==7){ $diax=utf8_decode("a los siete días del mes de"); }		elseif($ddia==8){ $diax=utf8_decode("a los ocho días del mes de"); }
+elseif($ddia==9){ $diax=utf8_decode("a los nueve días del mes de"); }		elseif($ddia==10){ $diax=utf8_decode("a los diez días del mes de"); }
+elseif($ddia==11){ $diax=utf8_decode("a los once días del mes de"); }		elseif($ddia==12){ $diax=utf8_decode("a los doce días del mes de"); }
+elseif($ddia==13){ $diax=utf8_decode("a los trece días del mes de"); }		elseif($ddia==14){ $diax=utf8_decode("a los catorce días del mes de"); }
+elseif($ddia==15){ $diax=utf8_decode("a los quince días del mes de"); }		elseif($ddia==16){ $diax=utf8_decode("a los dieciseis días del mes de"); }
+elseif($ddia==17){ $diax=utf8_decode("a los diecisiete días del mes de"); }	elseif($ddia==18){ $diax=utf8_decode("a los dieciocho días del mes de"); }	
+elseif($ddia==19){ $diax=utf8_decode("a los diecinueve días del mes de"); }	elseif($ddia==20){ $diax=utf8_decode("a los veinte días del mes de"); }	
+elseif($ddia==21){ $diax=utf8_decode("a los veintiuno días del mes de"); }	elseif($ddia==22){ $diax=utf8_decode("a los veintidos  días del mes de"); }	
+elseif($ddia==23){ $diax=utf8_decode("a los veintitres días del mes de"); }	elseif($ddia==24){ $diax=utf8_decode("a los veinticuatro días del mes de"); }	
+elseif($ddia==25){ $diax=utf8_decode("a los veinticinco días del mes de"); }	elseif($ddia==26){ $diax=utf8_decode("a los veintiseis días del mes de"); }	
+elseif($ddia==27){ $diax=utf8_decode("a los veintisiete días del mes de"); }	elseif($ddia==28){ $diax=utf8_decode("a los veintiocho días del mes de"); }	
+elseif($ddia==29){ $diax=utf8_decode("a los veintinueve días del mes de"); }	elseif($ddia==30){ $diax=utf8_decode("a los treinta días del mes de"); }	
+elseif($ddia==31){ $diax=utf8_decode("a los treinta y uno días del mes de");}
 $mm ="".date("m"); 
 if($mm == "01"){ $mesx=" enero"; }			elseif($mm == "02"){ $mesx=" febrero"; }
 elseif($mm == "03"){ $mesx=" marzo"; }		elseif($mm == "04"){ $mesx=" abril"; }
@@ -199,7 +199,7 @@ elseif($mm == "09"){ $mesx=" septiembre"; }elseif($mm == "10"){ $mesx=" octubre"
 elseif($mm == "11"){ $mesx=" noviembre"; }	elseif($mm == "12"){ $mesx=" diciembre"; }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$tex="Y, para los usos que fuere �til se extiende la presente certificaci�n en la Ciudad Universitaria ".$diax." ".$mesx." de $anno.";
+$tex=utf8_decode("Y, para los usos que fuere útil se extiende la presente certificación en la Ciudad Universitaria ").$diax." ".$mesx." de $anno.";
 $pdf->MultiCell(0,5,$tex);
 
 $pdf->Ln(10);
@@ -213,7 +213,7 @@ $ww=$pdf->GetStringWidth($tex)+6;
    	$pdf->SetX((210-$ww)/2);
     $pdf->Cell($ww,10,$tex);
 $pdf->Ln(5);
-$tex="ENCARGADO DE REALIZAR LA EVALUACI�N PSICOL�GICA A LOS ASPIRANTES A";
+$tex=utf8_decode("ENCARGADO DE REALIZAR LA EVALUACIÓN PSICOLÓGICA A LOS ASPIRANTES A");
 $ww=$pdf->GetStringWidth($tex)+6;
    	$pdf->SetX((210-$ww)/2);
     $pdf->Cell($ww,10,$tex);

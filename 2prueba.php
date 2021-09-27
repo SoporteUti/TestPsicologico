@@ -188,8 +188,13 @@ input:focus
 	{
 		if (document.Flogin.cod.value=="")
  		{
-			Sexy.alert('DEBE ESCRIBIR EL CODIGO DEL ASPIRANTE...');
+			Sexy.alert('DEBE ESCRIBIR EL N° DEL ASPIRANTE...');
 			document.Flogin.cod.focus();
+		}
+		if (document.Flogin.ano.value=="")
+ 		{
+			Sexy.alert('DEBE ESCRIBIR EL AÑO AL QUE ASPIRA...');
+			document.Flogin.ano.focus();
 		}
 		else
 		{
@@ -239,8 +244,13 @@ input:focus
 			  <legend align="center">Volver hacer la prueba	</legend> <br>
 			  <table width="424" border="0" cellpadding="0" cellspacing="0">
 			  <tr>
-				  <td width="159" height="30"><label for="lbnombre" class="label2">NIT del Aspirante:</label></td>
+				  <td width="159" height="30"><label for="lbnombre" class="label2">N° del Aspirante:</label></td>
 			  	  <td width="201" height="30"><input name="cod" type="text" class="texto1" id="cod" /> </td>
+			  </tr>
+
+			  <tr>
+				  <td width="159" height="30"><label for="lbnombre" class="label2">Año de Ingreso:</label></td>
+			  	  <td width="201" height="30"><input name="ano" type="text" class="texto1" id="ano" maxlength="4" /> </td>
 			  </tr>
 			  
 			  <tr>
@@ -275,8 +285,9 @@ input:focus
 include("conexion.php");
 if(isset($_POST['cod'])){
 $codigo=$_POST['cod'];
+$ano=$_POST['ano'];
 $flag=false;
-	$sqlx="SELECT idaspirante FROM tb_aspirantes WHERE nit='$codigo';";
+	$sqlx="SELECT idaspirante FROM tb_aspirantes WHERE idaspirante='$codigo' AND ano='$ano';";
 	$result3 = mysqli_query($conexion,$sqlx);
 	if($row=mysqli_fetch_array($result3))
 	{
@@ -296,7 +307,7 @@ if($_POST['bandera']=="ingresar")
 	
 	if($flag==true)
 	{
-		$sql="SELECT * FROM tb_aspirantes WHERE nit='$codigo';";
+		$sql="SELECT * FROM tb_aspirantes WHERE idaspirante='$codigo' AND ano='$ano';";
 		$result0 = mysqli_query($conexion,$sql);
 		if($row=mysqli_fetch_array($result0))
 		{
@@ -329,7 +340,7 @@ if($_POST['bandera']=="ingresar")
 			$_SESSION["acce"] = false;
 			echo'<script type="text/JavaScript">';
 			echo'{';
-				echo'alert("ERROR: NIT DE ASPIRANTE NO REGISTRADO...");';
+				echo'alert("ERROR: ASPIRANTE NO REGISTRADO...");';
 			echo'}';
 			echo'</script>';
 		}
