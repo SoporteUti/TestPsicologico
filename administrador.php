@@ -82,7 +82,7 @@ body
 			<tr>
 				<td>
 					<a href="3prueba.php">
-						<img src="img/2prueba.jpg" border="0" class="glossy">
+						<img src="img/3prueba.jpg" border="0" class="glossy">
 					</a>			  			
 				</td>
 			</tr>
