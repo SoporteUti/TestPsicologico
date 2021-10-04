@@ -528,6 +528,7 @@ if($_POST['bandera']=="guardar")
 		$numfin="0001";
 	}
 */
+include("conexion.php");
     $numfin=$naspirante;
 	$cons="SELECT * FROM tb_aspirantes WHERE anio='$anio' AND idaspirante='$numfin';";
 	$resultX = mysqli_query($conexion,$cons);
