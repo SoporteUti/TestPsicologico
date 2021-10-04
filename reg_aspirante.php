@@ -539,7 +539,7 @@ if($_POST['bandera']=="guardar")
 	if($flag==false)
 	{
 		$sql = "INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,sexo,edad,anio,profesorado) 		VALUES('$numfin','$nit','$nombre','$apellido','$sex','$edad','$anio','$prof');";
-		$result = @mysqli_query($conexion,$sql);
+		$result = mysqli_query($conexion,$sql);
 		echo'<script type="text/JavaScript">';
 		echo'{';
 			echo'alert("ASPIRANTE REGISTRADO...");';
