@@ -529,7 +529,7 @@ if($_POST['bandera']=="guardar")
 	}
 */
     $numfin=$naspirante;
-	$cons="SELECT nit FROM tb_aspirantes WHERE nit='$nit' or idaspirante='$numfin';";
+	$cons="SELECT * FROM tb_aspirantes WHERE ano='$ano' AND idaspirante='$numfin';";
 	$resultX = mysqli_query($conexion,$cons);
 	if($row=mysqli_fetch_array($resultX))
 	{
@@ -553,7 +553,7 @@ if($_POST['bandera']=="guardar")
 	{
 		echo'<script type="text/JavaScript">';
 		echo'{';
-			echo'alert("NIT:'.$nit.'  O N� ASPIRANTE: '.$numfin.' YA EXISTE POR FAVOR VERIFICAR...");';
+			echo'alert("N° ASPIRANTE: '.$numfin.' YA EXISTE POR FAVOR VERIFICAR...");';
 		echo'}';
 		echo'</script>';
 	}

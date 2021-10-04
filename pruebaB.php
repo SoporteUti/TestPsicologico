@@ -1,13 +1,15 @@
 <?php
 session_start();
-if($_SESSION[access]==false) {
+if($_SESSION["access"]==false) {
 	echo "<script language='javascript'>";
      echo"location.href='index.php';";
      echo "</script>";
 }
+if(isset( $_GET['var'])){
 $var= $_GET['var'];
-if($var==1){$_SESSION[testotis]=false;}elseif($var==2){$_SESSION[testepq]=false;}
+if($var==1){$_SESSION["testotis"]=false;}elseif($var==2){$_SESSION["testepq"]=false;}
 //$cod="0010";
+}//fin isset
 ?>
 <html>
 <head>
