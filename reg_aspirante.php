@@ -528,7 +528,7 @@ if($_POST['bandera']=="guardar")
 		$numfin="0001";
 	}
 */
-include("conexion.php");
+   include("conexion.php");
     $numfin=$naspirante;
 	$cons="SELECT * FROM tb_aspirantes WHERE anio='$anio' AND idaspirante='$numfin';";
 	$resultX = mysqli_query($conexion,$cons);
@@ -539,14 +539,15 @@ include("conexion.php");
 
 	if($flag==false)
 	{
-		//$sql = "";
-		mysqli_query($conexion,"INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,sexo,edad,anio,profesorado)VALUES('$numfin','$nit','$nombre','$apellido','$sex','$edad','$anio','$prof')");
+		$sql = "INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,sexo,edad,anio,profesorado) VALUES('$numfin','$nit','$nombre','$apellido','$sex','$edad','$anio','$prof');";
+		$result = @mysqli_query($conexion,$sql);
 		echo'<script type="text/JavaScript">';
 		echo'{';
 			echo'alert("ASPIRANTE REGISTRADO...");';
 			echo'location.href="log_aspirante.php";';
 		echo'}';
 		echo'</script>';
+		$result = @mysqli_query($conexion,$sql);
 	}
 	else
 	{
