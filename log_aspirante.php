@@ -205,11 +205,11 @@ input:focus
 			Sexy.alert('DEBE ESCRIBIR EL NUMERO DE ASPIRANTE...');
 			document.Flogin.txtaspirante.focus();
 		}
-		else if (document.Flogin.txtano2.value=="")
+		else if (document.Flogin.txtanio2.value=="")
 		{
 // 			alert('DEBE ESCRIBIR LA CONTRASE�A..');
 			Sexy.alert('DEBE ESCRIBIR SU AÑO DE INGRESO EJ:2022....');
-			document.Flogin.txtano2.focus();
+			document.Flogin.txtanio2.focus();
 		}
 		else
 		{
@@ -313,7 +313,7 @@ if(d.valant != d.value){
 			  </tr>
 			  <tr>
 			  	<td height="30"><label for="ape" class="label2">Año de Ingreso:</label></td>
-			  	<td height="30"><input name="txtano2" type="text" class="texto1" id="txtano2" size="30"  maxlength="4"  />	</td>
+			  	<td height="30"><input name="txtanio2" type="text" class="texto1" id="txtanio2" size="30"  maxlength="4"  />	</td>
 			</tr>
 			  <tr>
 			  <td colspan="2"><center><input type="button" name="Submit" value="Ingresar" class="button" onclick= "ingresar(Flogin)" />			<input type="button" name="Submit" value="Salir" class="button" onClick="volver();" /></center></td>
@@ -349,12 +349,12 @@ $fecha = date ( "Y/m/j" , $tiempo);
 
 include("conexion.php");
 $naspirante=$_POST['txtaspirante'];
-$ano=$_POST['txtano2'];
+$anio=$_POST['txtanio2'];
 $flag=false;
 
 if($_POST['bandera']=="ingresar")
 {
-		$sql="SELECT * FROM tb_aspirantes WHERE idaspirante='$naspirante' AND ano='$ano';";
+		$sql="SELECT * FROM tb_aspirantes WHERE idaspirante='$naspirante' AND anio='$anio';";
 		$result0 = mysqli_query($conexion,$sql);
 		if($row=mysqli_fetch_array($result0))
 		{

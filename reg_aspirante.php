@@ -504,7 +504,7 @@ $nombre=$_POST['txtnombre'];
 $apellido=$_POST['txtapellido'];
 $sex=$_POST['sexo'];
 $edad=$_POST['edad'];
-$ano=$_POST['ingreso'];
+$anio=$_POST['ingreso'];
 $prof=$_POST['prof'];
 $flag=false;
 
@@ -538,10 +538,8 @@ if($_POST['bandera']=="guardar")
 
 	if($flag==false)
 	{
-		$sql = "INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,sexo,edad,ano,profesorado) 		VALUES('$numfin','$nit','$nombre','$apellido','$sex','$edad','$ano','$prof');";
+		$sql = "INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,sexo,edad,anio,profesorado) 		VALUES('$numfin','$nit','$nombre','$apellido','$sex','$edad','$anio','$prof');";
 		$result = @mysqli_query($conexion,$sql);
-		mysqli_close($conexion);
-
 		echo'<script type="text/JavaScript">';
 		echo'{';
 			echo'alert("ASPIRANTE REGISTRADO...");';
