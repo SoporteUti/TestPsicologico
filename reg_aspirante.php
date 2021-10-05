@@ -510,7 +510,7 @@ $flag=false;
 
 if($_POST['bandera']=="guardar")
 {
-
+include("conexion.php");
 /*esto genera el numero de aspirante, pero ya lo tienen, as� que lo voy a pedir en el formulario 10/08/2013, por lo tanto hay que modificar el formulario
 
 	$consul="SELECT COUNT(*) AS numfin FROM tb_aspirantes;";
@@ -528,7 +528,7 @@ if($_POST['bandera']=="guardar")
 		$numfin="0001";
 	}
 */
-include("conexion.php");
+	
     $numfin=$naspirante;
 	$cons="SELECT * FROM tb_aspirantes WHERE anio='$anio' AND idaspirante='$numfin';";
 	$resultX = mysqli_query($conexion,$cons);
@@ -539,14 +539,23 @@ include("conexion.php");
 
 	if($flag==false)
 	{
-		//$sql = "";
-		mysqli_query($conexion,"INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,sexo,edad,anio,profesorado)VALUES('$numfin','$nit','$nombre','$apellido','$sex','$edad','$anio','$prof');");
+		$sql = "INSERT INTO tb_aspirantes (idaspirante,nit,nombre,apellido,profesorado,fecha,sexo,edad,anio) VALUES('$numfin','$nit','$nombre','$apellido','$prof','','$sex','$edad','$anio');";
+		$result = @mysqli_query($conexion,$sql);
+	   
+		if($result==true){
 		echo'<script type="text/JavaScript">';
 		echo'{';
 			echo'alert("ASPIRANTE REGISTRADO...");';
 			echo'location.href="log_aspirante.php";';
 		echo'}';
 		echo'</script>';
+		}else{
+			echo'<script type="text/JavaScript">';
+		echo'{';
+			echo'alert("PETICIÓN SIN EXITO...");';
+		echo'}';
+		echo'</script>';
+		}
 	}
 	else
 	{
