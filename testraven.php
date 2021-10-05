@@ -721,7 +721,7 @@ document.onkeydown=checkKeyCode;
 				else
 				{
 					$sql1 = "INSERT INTO tb_respraven (idraven,idaspirante,idnum_prue,respuesta) VALUES($aux1,'$cod','$num_prue','$ppraven[$i]');";
-					var_dump($sql1);
+					//var_dump($sql1);
 					$result1 = @mysqli_query($conexion,$sql1);
 				}
 			}
