@@ -297,7 +297,7 @@ $consul='select t1.idcep c1,t2.preguntas c2,t1.respuesta c3 from tb_respcep as t
 			<?php	
 					if($row['c3']==1){ $rr="Si";}elseif($row['c3']==2){ $rr="?";}elseif($row['c3']==3){ $rr="No";}else{$rr="-";}
 					echo'<td width="5%">'.$row['c1'].'</td>';
-			        echo'<td width="80%">'.utf8_encode($row['c2']).'</td>';
+			        echo'<td width="80%">'.$row['c2'].'</td>';
 					echo'<td width="11%">'.$rr.'</td>';
 			        echo'</tr>';
 					$i++;

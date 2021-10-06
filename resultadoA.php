@@ -81,7 +81,8 @@ $title3='Unidad de Ingreso Universitario';
 $title4=utf8_decode('RESULTADO DE EVALUACIÓN PSICOLÓGICA');
 $tiempo = time();
 $anno = date ( "Y" , $tiempo);
-$anno= $anno + 1; 
+$anno= $anno + 1;
+$anno2= $anno - 1; 
 $title5=utf8_decode('AÑO ACADÉMICO ').$anno;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
     include_once("conexion.php");
@@ -227,7 +228,7 @@ elseif($mm=="09"){ $mesx=" septiembre"; }   elseif($mm=="10"){ $mesx=" octubre";
 elseif($mm=="11"){ $mesx=" noviembre"; }	elseif($mm=="12"){ $mesx=" diciembre"; }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$tex=utf8_decode("Y, para los usos que fuere útil se extiende la presente certificación en la Ciudad Universitaria ").$diax." ".$mesx." de $anno.";
+$tex=utf8_decode("Y, para los usos que fuere útil se extiende la presente certificación en la Ciudad Universitaria ").$diax." ".$mesx." de $anno2.";
 $pdf->MultiCell(0,5,$tex);
 
 $pdf->Ln(10);

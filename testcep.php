@@ -477,7 +477,7 @@ document.onkeydown=checkKeyCode;
 						echo'<legend>'.$row["idcep"].'</legend>';
 						$aux3++;
 						echo'<table border="0" width="700">';
-						echo '<tr><td width="20">&nbsp;</td><td align="left" colspan="4" width="680"><font size="5">'.utf8_encode($row["preguntas"]).'</td>';
+						echo '<tr><td width="20">&nbsp;</td><td align="left" colspan="4" width="680"><font size="5">'.$row["preguntas"].'</td>';
 						echo'<tr><td></td>';
 						echo'<td align="left" width="100"><b>Si<INPUT TYPE=radio NAME="CEP'.$row["idcep"].'" value="1" '.$OpcionCEP1.' class="styled"/></td>';
 						echo'<td align="left" width="100"><b>?<INPUT TYPE=radio NAME="CEP'.$row["idcep"].'" value="2"  '.$OpcionCEP2.' class="styled"/></td>';
