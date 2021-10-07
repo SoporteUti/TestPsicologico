@@ -93,6 +93,7 @@ body
 				echo'</td>';
 			}
 			/*fin de realizar activacion de tercera prueba */
+		    
 			
 			$sql="SELECT if(prueba_num=1,'PRIMERA VEZ','SEGUNDA VEZ') as num, prueba_num FROM tb_resultadosb WHERE idaspirante='$cod';";
 			$result0 = mysqli_query($conexion,$sql);
