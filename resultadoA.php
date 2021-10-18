@@ -174,7 +174,7 @@ $pdf->Cell(0,20,utf8_decode('Género: ').$ss,0,1);
 $pdf->Cell(0,10,'Aspirante a ingresar al Profesorado en:',0,1);
 
 $pdf->SetX(20);
-$pdf->MultiCell(0,5,'- '.$pp);
+$pdf->MultiCell(0,5,utf8_decode('- '.$pp));
 $pdf->Ln();
 $pdf->SetX(0);
 $pdf->SetX(20);

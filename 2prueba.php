@@ -191,10 +191,10 @@ input:focus
 			Sexy.alert('DEBE ESCRIBIR EL N° DEL ASPIRANTE...');
 			document.Flogin.cod.focus();
 		}
-		if (document.Flogin.ano.value=="")
+		if (document.Flogin.anio.value=="")
  		{
 			Sexy.alert('DEBE ESCRIBIR EL AÑO AL QUE ASPIRA...');
-			document.Flogin.ano.focus();
+			document.Flogin.anio.focus();
 		}
 		else
 		{
@@ -250,7 +250,7 @@ input:focus
 
 			  <tr>
 				  <td width="159" height="30"><label for="lbnombre" class="label2">Año de Ingreso:</label></td>
-			  	  <td width="201" height="30"><input name="ano" type="text" class="texto1" id="ano" maxlength="4" /> </td>
+			  	  <td width="201" height="30"><input name="anio" type="text" class="texto1" id="anio" maxlength="4" /> </td>
 			  </tr>
 			  
 			  <tr>
@@ -285,9 +285,9 @@ input:focus
 include("conexion.php");
 if(isset($_POST['cod'])){
 $codigo=$_POST['cod'];
-$ano=$_POST['ano'];
+$anio=$_POST['anio'];
 $flag=false;
-	$sqlx="SELECT idaspirante FROM tb_aspirantes WHERE idaspirante='$codigo' AND ano='$ano';";
+	$sqlx="SELECT idaspirante FROM tb_aspirantes WHERE idaspirante='$codigo' AND anio='$anio';";
 	$result3 = mysqli_query($conexion,$sqlx);
 	if($row=mysqli_fetch_array($result3))
 	{
@@ -307,7 +307,7 @@ if($_POST['bandera']=="ingresar")
 	
 	if($flag==true)
 	{
-		$sql="SELECT * FROM tb_aspirantes WHERE idaspirante='$codigo' AND ano='$ano';";
+		$sql="SELECT * FROM tb_aspirantes WHERE idaspirante='$codigo' AND anio='$anio';";
 		$result0 = mysqli_query($conexion,$sql);
 		if($row=mysqli_fetch_array($result0))
 		{
